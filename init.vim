@@ -17,6 +17,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'windwp/nvim-autopairs'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -34,13 +35,14 @@ nnoremap <silent><C-h> :bp<CR>
 nnoremap <silent><C-l> :bn<CR>
 
 set number
-" set relativenumber
+set relativenumber
 set showmatch
 set mouse=a
 set termguicolors
 set autoindent
 set smartindent
 colorscheme nightfly
+set clipboard+=unnamedplus
 
 " brakets auto completion
 lua << EOF
@@ -155,14 +157,30 @@ let g:airline_powerline_fonts = 1
 " 크기를 10 으로 재설정(resize) 후 창 높이를 고정(winfixheight)시킴
 " 줄번호는 삭제하고, 터미널 디렉터리 글자색을 변경
 
+" ------------------------------------
+"  Commentary
+" ------------------------------------
+" 주석 Ctrl + /
+nnoremap <C-_> :Commentary<cr>j
+inoremap <C-_> <Esc>:Commentary<cr>ji
+
+" ------------------------------------
+"  F2 to Terminal
+" ------------------------------------
+" F2 눌러서 터미널 실행
 nnoremap <silent><F2> 
-	\:botright new<CR><bar>
+	\:botright vsplit new<CR><bar>
 	\:terminal<CR><bar><ESC>
-	\:resize 10<CR><bar>
-	\:set winfixheight<CR><bar>
+	\:set norelativenumber<CR><bar>
 	\:set nonu<CR><bar>
 	\i
 
+	" \:resize 10<CR><bar>
+	" \:set winfixheight<CR><bar>
+
+" ------------------------------------
+"  Telescope
+" ------------------------------------
 " Find files using Telescope command-line sugar.
 nnoremap <silent><C-p> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>

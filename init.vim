@@ -1,6 +1,10 @@
 " utf-8 byte sequence.
 set encoding=utf-8
 
+" ------------------------------------
+"  Vim-Plug Plugins
+" ------------------------------------
+"  NOTE: see https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
 " THEME
@@ -16,11 +20,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+" Code Editting
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-easy-align'
 
 call plug#end()
 
+" set Vim update time
 set updatetime=1000
 
 " <F1> 을 통해 NERDTree 와 Tagbar 열기
@@ -34,6 +42,7 @@ nnoremap <silent><C-k> :tabnext<CR>
 nnoremap <silent><C-h> :bp<CR>
 nnoremap <silent><C-l> :bn<CR>
 
+" vim configuration
 set number
 set relativenumber
 set showmatch
@@ -44,15 +53,19 @@ set smartindent
 colorscheme nightfly
 set clipboard+=unnamedplus
 
-" brakets auto completion
+" ------------------------------------
+"  Autopairs Configuration
+" ------------------------------------
+
 lua << EOF
 require("nvim-autopairs").setup {}
 EOF
 
-" =========================================================================
-" =  하이라이트 정의                                                      =
-" =========================================================================
-" 버퍼(창)과 버퍼의 끝(창의 끝)을 투명하게
+" ------------------------------------
+"  Vim Highlight Configuration
+" ------------------------------------
+
+" transparent buffer
 highlight Normal guibg=NONE
 highlight EndOfBuffer guibg=NONE
 
@@ -64,16 +77,18 @@ highlight LineNr guibg=NONE gui=bold guifg=white
 highlight ColorColumn guibg=White
 
 " ------------------------------------
-"  CoC
+"  CoC Configuration
 " ------------------------------------
-"  NOTE: :CocInstall @yaegassy/coc-pylsp
+"  NOTE: :CocInstall coc-pyright
+"  NOTE: :CocInstall coc-clangd
+"  NOTE: :CocInstall coc-json
+"  NOTE: :CocInstall coc-tabnine
+"  NOTE: :CocInstall coc-sh
+"  NOTE: :CocInstall coc-prettier
+
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" <TAB>으로 자동완성 이동 <ENTER>로 선택
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -90,7 +105,7 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+" <c-space> 으로 자동완성 실행
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
@@ -121,9 +136,6 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" changing coc highlight color cause light grey is invisible
-" BUT is overwritten by scheme so defining it in an autocmd after colorscheme
-" change
 
 " ------------------------------------
 " NERDTree highlight
@@ -133,20 +145,20 @@ let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 
 " ------------------------------------
-" tagbar 설정
+" tagbar Configuration
 " ------------------------------------
 " tagbar 생성 시 우측 하단에 위치하게끔 생성
 let g:tagbar_position = 'right'
 let g:tagbar_width = 30
 
 " ------------------------------------
-" NERDTree 설정
+" NERDTree Configuration
 " ------------------------------------
 " 창 크기(가로)를 20 으로 설정
 let g:NERDTreeWinSize=30
 
 " ------------------------------------
-"  PowerLine 
+"  PowerLine Configuration
 " ------------------------------------
 " Tab line 에 파일명만 출력되도록 설정
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -158,9 +170,9 @@ let g:airline_powerline_fonts = 1
 " 줄번호는 삭제하고, 터미널 디렉터리 글자색을 변경
 
 " ------------------------------------
-"  Commentary
+"  Commentary Configuration
 " ------------------------------------
-" 주석 Ctrl + /
+" <Ctrl + />으로 현재 줄 주석처리
 nnoremap <C-_> :Commentary<cr>j
 inoremap <C-_> <Esc>:Commentary<cr>ji
 
@@ -178,18 +190,6 @@ nnoremap <silent><F2>
 	" \:resize 10<CR><bar>
 	" \:set winfixheight<CR><bar>
 
-" ------------------------------------
-"  Telescope
-" ------------------------------------
-" Find files using Telescope command-line sugar.
-nnoremap <silent><C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" ------------------------------------
-" 터미널 모드 
-" ------------------------------------
 " 터미널 모드에서 <Ctrl + w> 누르면 명령 모드로 전환하고 <Ctrl + w> 입력
 tmap <silent><C-w> <ESC><C-w>
 
@@ -199,3 +199,19 @@ tmap <silent>kj <ESC>
 
 " <ESC> 입력 시 <C-\><C-n> 실행 => 터미널 모드에서 기본 모드로 전환
 tnoremap <silent><ESC> <C-\><C-n>
+
+" ------------------------------------
+"  Telescope Configuration
+" ------------------------------------
+" Find files using Telescope command-line sugar.
+nnoremap <silent><C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+

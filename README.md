@@ -1,6 +1,6 @@
 # .config
 
-.config  
-├── starship.toml  
-└── nvim  
-　　　└── init.vim
+~/.config  
+　　├── starship.toml  
+　　└── nvim  
+　　　　　└── init.vim

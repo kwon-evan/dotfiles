@@ -35,9 +35,9 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 call plug#end()
 
-" set Vim update time
-set updatetime=1000
-
+" ------------------------------------
+"  Key Bindings
+" ------------------------------------
 " <F1> 을 통해 NvimTree 와 Tagbar 열기
 nnoremap <silent><F1> :NvimTreeToggle<CR><bar>:TagbarToggle <CR>
 
@@ -64,7 +64,11 @@ nnoremap <silent><C-k> :tabnext<CR>
 nnoremap <silent><C-h> :bp<CR>
 nnoremap <silent><C-l> :bn<CR>
 
-" vim configuration
+" ------------------------------------
+"  Vim Configuration
+" ------------------------------------
+"  base
+set updatetime=1000
 set number
 set relativenumber
 set showmatch
@@ -73,7 +77,19 @@ set termguicolors
 set autoindent
 set smartindent
 set clipboard+=unnamedplus
-colorscheme tokyonight-night
+
+" transparent buffer
+highlight Normal guibg=NONE
+highlight EndOfBuffer guibg=NONE
+
+" 줄번호 배경색은 투명(NULL)하게, 
+" 글자는 굵게(bold), 글자색은 하얗게(White)
+highlight LineNr guibg=NONE gui=bold 
+" guifg=white
+
+" 행 표시선 색상
+highlight ColorColumn guibg=White
+
 
 " ------------------------------------
 "  Lualine Configuration
@@ -81,7 +97,7 @@ colorscheme tokyonight-night
 lua << END
 require('lualine').setup {
 	options = {
-		theme='nightfly',
+		theme='tokyonight',
 		component_separators = { left = '|', right = '|'},
 		section_separators = { left = '', right = ''},
 		},
@@ -95,22 +111,6 @@ END
 lua << EOF
 require("nvim-autopairs").setup {}
 EOF
-
-" ------------------------------------
-"  Vim Highlight Configuration
-" ------------------------------------
-
-" transparent buffer
-highlight Normal guibg=NONE
-highlight EndOfBuffer guibg=NONE
-
-" 줄번호 배경색은 투명(NULL)하게, 
-" 글자는 굵게(bold), 글자색은 하얗게(White)
-highlight LineNr guibg=NONE gui=bold 
-" guifg=white
-
-" 행 표시선 색상
-highlight ColorColumn guibg=White
 
 " ------------------------------------
 "  CoC Configuration
@@ -188,8 +188,7 @@ let g:tagbar_width = 30
 " Which-Key Configuration
 " ------------------------------------
 lua << EOF
-require("which-key").setup {
-	}
+require("which-key").setup {}
 EOF
 
 " ------------------------------------
@@ -223,3 +222,51 @@ nmap ga <Plug>(EasyAlign)
 lua << EOF
 require("toggleterm").setup {}
 EOF
+
+
+" ------------------------------------
+" BarBar Configuration
+" ------------------------------------
+lua << EOF
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  pattern = '*',
+  callback = function()
+    if vim.bo.filetype == 'NvimTree' then
+      require'bufferline.api'.set_offset(31, 'FileTree')
+    end
+  end
+})
+
+vim.api.nvim_create_autocmd('BufWinLeave', {
+  pattern = '*',
+  callback = function()
+    if vim.fn.expand('<afile>'):match('NvimTree') then
+      require'bufferline.api'.set_offset(0)
+    end
+  end
+})
+EOF
+
+" ------------------------------------
+" COLORSCHEME: tokyonight
+" ------------------------------------
+lua << EOF
+require("tokyonight").setup({
+  style = "night",
+  transparent = true, 
+  terminal_colors = true, 
+  styles = {
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+    sidebars = "dark",
+    floats = "dark", 
+  },
+  sidebars = { "qf", "help", "NvimTree", "Tagbar", "ToggleTerm" },
+  hide_inactive_statusline = true,
+  dim_inactive = true, -- dims inactive windows
+  lualine_bold = true,
+})
+EOF
+colorscheme tokyonight

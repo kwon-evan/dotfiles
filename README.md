@@ -1,14 +1,6 @@
-# .init.vim
-my vim config
+# .config
 
-## init.vim
-
-~  
-| .config  
-    | nvim  
-        | init.vim <- goes here  
-
-## .tmux.conf
-
-~  
-| .tmux.conf  
+.config  
+├── starship.toml  
+└── nvim  
+　　　└── init.vim

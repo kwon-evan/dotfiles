@@ -14,6 +14,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'preservim/tagbar'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -79,8 +80,8 @@ set smartindent
 set clipboard+=unnamedplus
 
 " transparent buffer
-highlight Normal guibg=NONE
-highlight EndOfBuffer guibg=NONE
+" highlight Normal guibg=NONE
+" highlight EndOfBuffer guibg=NONE
 
 " 줄번호 배경색은 투명(NULL)하게, 
 " 글자는 굵게(bold), 글자색은 하얗게(White)
@@ -247,6 +248,18 @@ vim.api.nvim_create_autocmd('BufWinLeave', {
 })
 EOF
 
+
+" ------------------------------------
+" BarBar Configuration
+" ------------------------------------
+lua << EOF
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    -- show_current_context_start = true,
+}
+EOF
+
 " ------------------------------------
 " COLORSCHEME: tokyonight
 " ------------------------------------
@@ -270,3 +283,6 @@ require("tokyonight").setup({
 })
 EOF
 colorscheme tokyonight
+hi NvimTreeNormal guibg=NONE cterm=NONE
+hi NvimTreeNormalNC guibg=NONE cterm=NONE
+

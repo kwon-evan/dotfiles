@@ -32,7 +32,8 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 
 " Color Scheme
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 call plug#end()
 
@@ -98,7 +99,7 @@ highlight ColorColumn guibg=White
 lua << END
 require('lualine').setup {
 	options = {
-		theme='tokyonight',
+		theme='catppuccin',
 		component_separators = { left = '|', right = '|'},
 		section_separators = { left = '', right = ''},
 		},
@@ -261,28 +262,34 @@ require("indent_blankline").setup {
 EOF
 
 " ------------------------------------
-" COLORSCHEME: tokyonight
+" COLORSCHEME: catppuccin
 " ------------------------------------
 lua << EOF
-require("tokyonight").setup({
-  style = "night",
-  transparent = true, 
-  terminal_colors = true, 
-  styles = {
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-    sidebars = "dark",
-    floats = "dark", 
-  },
-  sidebars = { "qf", "help", "NvimTree", "Tagbar", "ToggleTerm" },
-  hide_inactive_statusline = true,
-  dim_inactive = true, -- dims inactive windows
-  lualine_bold = true,
+require("catppuccin").setup({
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+    transparent_background = false,
+    term_colors = false,
+    dim_inactive = {
+        enabled = false,
+        shade = "dark",
+        percentage = 0.15,
+    },
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        notify = false,
+        mini = false,
+	barbar = true,
+	telescope = true,
+    },
 })
+
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
 EOF
-colorscheme tokyonight
+" colorscheme tokyonight
 hi NvimTreeNormal guibg=NONE cterm=NONE
 hi NvimTreeNormalNC guibg=NONE cterm=NONE
 

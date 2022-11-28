@@ -1,8 +1,9 @@
 return {
   settings = {
     python = {
+      pythonPath = "/usr/bin/python",
       analysis = {
-        typeCheckingMode = "off",
+        typeCheckingMode = "on",
       },
     },
   },

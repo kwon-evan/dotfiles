@@ -1,6 +1,7 @@
 local servers = {
 	"sumneko_lua",
 	"pyright",
+  -- "rust-analyzer",
 }
 
 local settings = {

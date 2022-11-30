@@ -6,7 +6,7 @@ if not status_ok then
 end
 
 require("catppuccin").setup({
-    flavour = "latte", -- latte, frappe, macchiato, mocha
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
 })
 
 -- setup must be called before loading

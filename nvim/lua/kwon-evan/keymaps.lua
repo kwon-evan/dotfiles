@@ -54,6 +54,12 @@ keymap("i", "jk", "<ESC>", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+-- Terminal --
+-- Terminal to Normal 
+keymap("t", "<ESC>", "<C-\\><C-n>")
+-- <C-T> enable in Terminal Mode
+keymap("t", "<C-w>", "<ESC><C-w>")
+
 -- Plugins --
 
 -- NvimTree

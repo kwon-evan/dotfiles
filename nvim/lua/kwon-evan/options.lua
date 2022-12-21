@@ -1,3 +1,4 @@
+--- opt ---
 vim.opt.backup = false                          -- creates a backup file
 vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
@@ -24,14 +25,6 @@ vim.opt.expandtab = true                        -- convert tabs to spaces
 vim.opt.shiftwidth = 2                          -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
-vim.api.nvim_create_autocmd(                    -- highlight the current line when cursor move to another window
-  "WinEnter",
-  { command = "setlocal cursorline" }
-)
-vim.api.nvim_create_autocmd(                    -- highlight off the current line when leave current window
-  "WinLeave", 
-  { command = "setlocal nocursorline" }
-)
 vim.opt.number = true                           -- set numbered lines
 vim.opt.relativenumber = true                   -- set relative numbered line
 vim.opt.colorcolumn = "120"                     -- color column limit at 81 
@@ -50,3 +43,8 @@ vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the p
 vim.opt.iskeyword:append("-")                   -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
+--- api ---
+vim.api.nvim_create_autocmd(                    -- highlight the current line when cursor move to another window
+  "WinEnter", { command = "setlocal cursorline" })
+vim.api.nvim_create_autocmd(                    -- highlight off the current line when leave current window
+  "WinLeave", { command = "setlocal nocursorline" })

@@ -97,12 +97,13 @@ cmp.setup({
 		format = function(entry, vim_item)
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
-				nvim_lsp = "",
-				nvim_lua = "",
-				luasnip = "",
-				buffer = "",
-				path = "",
+				nvim_lsp = "爵",
+				nvim_lua = "",
+				luasnip = " [SNIP]",
+				buffer = "﬘",
+				path = "",
 				emoji = "",
+        cmp_tabnine = ""
 			})[entry.source.name]
 			return vim_item
 		end,

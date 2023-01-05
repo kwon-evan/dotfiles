@@ -17,11 +17,14 @@ configs.setup({
   highlight = {
 		enable = true, -- false will disable the whole extension
 		disable = { "css" }, -- list of language that will be disabled
+    additional_vim_regex_highlighting = false,
 	},
+
 	autopairs = {
 		enable = true,
 	},
-	indent = { enable = true, disable = { "python", "css" } },
+
+	indent = { enable = true, disable = { "css" } },
 
 	context_commentstring = {
 		enable = true,

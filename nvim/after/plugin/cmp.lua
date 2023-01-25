@@ -8,6 +8,15 @@ if not snip_status_ok then
 	return
 end
 
+local tabnine_status_ok, tabnine = pcall(require, "cmp_tabnine")
+if not tabnine_status_ok then
+	return
+else
+  tabnine.setup({})
+end
+
+local compare = require('cmp.config.compare')
+
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
@@ -49,7 +58,6 @@ cmp.setup({
 			luasnip.lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
-
 	mapping = cmp.mapping.preset.insert({
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
@@ -97,13 +105,13 @@ cmp.setup({
 		format = function(entry, vim_item)
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
+        cmp_tabnine = "",
 				nvim_lsp = "爵",
 				nvim_lua = "",
-				luasnip = " [SNIP]",
+				luasnip = "",
 				buffer = "﬘",
 				path = "",
 				emoji = "",
-        cmp_tabnine = ""
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -120,6 +128,20 @@ cmp.setup({
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
 	},
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      require('cmp_tabnine.compare'),
+      compare.offset,
+      compare.exact,
+      compare.score,
+      compare.recently_used,
+      compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  },
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),

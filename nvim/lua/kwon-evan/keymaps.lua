@@ -73,8 +73,8 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
+keymap("n", "<C-_>", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>j", opts)
+keymap("x", "<C-_>", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- ToggleTerm
 keymap("n", "<F5>", "<cmd>ToggleTerm size=60 direction=vertical<CR>")

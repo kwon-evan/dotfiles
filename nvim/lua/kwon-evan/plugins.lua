@@ -107,11 +107,14 @@ return packer.startup(function(use)
   -- Which-Key
   use { "folke/which-key.nvim" }
 
-  -- Symbol-outline
+  -- symbol-outline
   use { 'simrat39/symbols-outline.nvim' }
 
-  -- Rust
+  -- rust
   use { 'simrat39/rust-tools.nvim' }
+
+  -- alignment
+  use { 'vonr/align.nvim' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

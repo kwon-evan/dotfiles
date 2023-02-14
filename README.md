@@ -1,9 +1,9 @@
 # .config
 
-~/.config
-　　├── starship.toml
-　　├── nvim.lazy
-　　└── ~~nvim.packer~~
+~/.config  
+　　├── starship.toml  
+　　├── nvim.lazy  
+　　└── ~~nvim.packer~~  
 
 ## DO
 ```bash

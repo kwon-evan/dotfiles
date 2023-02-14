@@ -47,6 +47,8 @@ vim.opt.undolevels = 10000
 vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 vim.opt.wrap = false -- Disable line wrap
+vim.api.nvim_create_autocmd("WinEnter", { pattern = "*", command = "set cursorline" }) -- Cursorline where cursor is
+vim.api.nvim_create_autocmd("WinLeave", { pattern = "*", command = "set nocursorline" }) -- Cursorline where cursor is
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.opt.splitkeep = "screen"

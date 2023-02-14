@@ -1,10 +1,10 @@
 # .config
-```
-~/.config  
-　　├── starship.toml  
+
+~/.config
+　　├── starship.toml
 　　├── nvim.lazy
 　　└── ~~nvim.packer~~
-```
+
 ## DO
 ```bash
 git clone https://github.com/kwon-evan/dotfiles.git ~/dotfiles/

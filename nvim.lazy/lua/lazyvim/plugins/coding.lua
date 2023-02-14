@@ -47,76 +47,110 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
-      cmp.setup({
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      cmp.setup(
+        {
+          completion = {
+            completeopt = "menu,menuone,noinsert",
+          },
+          snippet = {
+            expand = function(args)
+              require("luasnip").lsp_expand(args.body)
+            end,
+          },
+          mapping = cmp.mapping.preset.insert({
+            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- they way you will only jump inside the snippet region
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
+            ["<Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+              -- they way you will only jump inside the snippet region
+              elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+              elseif has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
 
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-          { name = "emoji" },
-        }),
-        formatting = {
-          format = function(_, item)
-            local icons = require("lazyvim.config.settings").icons.kinds
-            if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
-            end
-            return item
-          end,
-        },
-        confirm_opts = {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        experimental = {
-          ghost_text = {
-            hl_group = "LspCodeLens",
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+          }),
+          sources = cmp.config.sources({
+            { name = "nvim_lsp" },
+            { name = "luasnip" },
+            { name = "buffer" },
+            { name = "path" },
+            { name = "emoji" },
+          }),
+          formatting = {
+            format = function(_, item)
+              local icons = require("lazyvim.config.settings").icons.kinds
+              if icons[item.kind] then
+                item.kind = icons[item.kind] .. item.kind
+              end
+              return item
+            end,
+          },
+          confirm_opts = {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+          },
+          window = {
+            completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
+          },
+          experimental = {
+            ghost_text = {
+              hl_group = "LspCodeLens",
+            },
           },
         },
-      })
+        cmp.setup.filetype("gitcommit", {
+          sources = cmp.config.sources({
+            { name = "git" },
+            { name = "buffer" },
+          }),
+        }),
+
+        cmp.setup.cmdline({ "/", "?" }, {
+          mhpping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "nvim_lsp_document_symbol" },
+            { name = "buffer" },
+          }),
+        }),
+
+        cmp.setup.cmdline(":", {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "cmdline" },
+            { name = "cmdline_history" },
+            { name = "path" },
+          }),
+        })
+
+        -- prepare for copilot
+        -- cmp.event:on("menu_opened", function()
+        --   vim.b.copilot_suggestion_hidden = true
+        -- end),
+        --
+        -- cmp.event:on("menu_closed", function()
+        --   vim.b.copilot_suggestion_hidden = false
+        -- end)
+      )
     end,
   },
 
@@ -238,4 +272,27 @@ return {
       { "<C-_>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>j", mode = "v" },
     },
   },
+
+  -- prepare for copilot
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     vim.keymap.set("i", "<Tab>", function()
+  --       if require("copilot.suggestion").is_visible() then
+  --         require("copilot.suggestion").accept()
+  --       else
+  --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+  --       end
+  --     end, {
+  --       silent = true,
+  --     })
+  --     require("copilot").setup({
+  --       suggestion = {
+  --         auto_trigger = true,
+  --         accept = false,
+  --       },
+  --     })
+  --   end,
+  -- },
 }

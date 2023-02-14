@@ -30,6 +30,14 @@ vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 vim.keymap.set("n", "<C-Left>", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "<C-Right>", "<cmd>bnext<cr>")
 
+-- Navigate buffers
+vim.keymap.set("n", "<C-j>", "<cmd>bprevious<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>bnext<CR>")
+
+-- Navigate Windows
+vim.keymap.set("n", "<C-h>", "<C-w>w")
+vim.keymap.set("n", "<C-l>", "<C-w>W")
+
 -- Easier pasting
 vim.keymap.set("n", "[p", ":pu!<cr>")
 vim.keymap.set("n", "]p", ":pu<cr>")

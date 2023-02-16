@@ -14,17 +14,17 @@ return {
       delete_check_events = "TextChanged",
     },
     -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true, remap = true, silent = true, mode = "i",
-      },
-      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    },
+    -- keys = {
+    --   {
+    --     "<tab>",
+    --     function()
+    --       return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+    --     end,
+    --     expr = true, remap = true, silent = true, mode = "i",
+    --   },
+    --   { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+    --   { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    -- },
   },
 
   -- auto completion
@@ -140,16 +140,15 @@ return {
             { name = "cmdline_history" },
             { name = "path" },
           }),
-        })
+        }),
 
-        -- prepare for copilot
-        -- cmp.event:on("menu_opened", function()
-        --   vim.b.copilot_suggestion_hidden = true
-        -- end),
-        --
-        -- cmp.event:on("menu_closed", function()
-        --   vim.b.copilot_suggestion_hidden = false
-        -- end)
+        cmp.event:on("menu_opened", function()
+          vim.b.copilot_suggestion_hidden = true
+        end),
+
+        cmp.event:on("menu_closed", function()
+          vim.b.copilot_suggestion_hidden = false
+        end)
       )
     end,
   },
@@ -273,26 +272,25 @@ return {
     },
   },
 
-  -- prepare for copilot
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     vim.keymap.set("i", "<Tab>", function()
-  --       if require("copilot.suggestion").is_visible() then
-  --         require("copilot.suggestion").accept()
-  --       else
-  --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-  --       end
-  --     end, {
-  --       silent = true,
-  --     })
-  --     require("copilot").setup({
-  --       suggestion = {
-  --         auto_trigger = true,
-  --         accept = false,
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    config = function()
+      vim.keymap.set("i", "<Tab>", function()
+        if require("copilot.suggestion").is_visible() then
+          require("copilot.suggestion").accept()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+        end
+      end, {
+        silent = true,
+      })
+      require("copilot").setup({
+        suggestion = {
+          auto_trigger = true,
+          accept = false,
+        },
+      })
+    end,
+  },
 }

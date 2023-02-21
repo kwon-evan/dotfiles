@@ -63,7 +63,6 @@ return {
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<C-e>"] = cmp.mapping.abort(),
             ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-
             ["<Tab>"] = cmp.mapping(function(fallback)
               if cmp.visible() then
                 cmp.select_next_item()
@@ -77,7 +76,6 @@ return {
                 fallback()
               end
             end, { "i", "s" }),
-
             ["<S-Tab>"] = cmp.mapping(function(fallback)
               if cmp.visible() then
                 cmp.select_prev_item()
@@ -124,7 +122,6 @@ return {
             { name = "buffer" },
           }),
         }),
-
         cmp.setup.cmdline({ "/", "?" }, {
           mhpping = cmp.mapping.preset.cmdline(),
           sources = cmp.config.sources({
@@ -132,7 +129,6 @@ return {
             { name = "buffer" },
           }),
         }),
-
         cmp.setup.cmdline(":", {
           mapping = cmp.mapping.preset.cmdline(),
           sources = cmp.config.sources({
@@ -141,11 +137,9 @@ return {
             { name = "path" },
           }),
         }),
-
         cmp.event:on("menu_opened", function()
           vim.b.copilot_suggestion_hidden = true
         end),
-
         cmp.event:on("menu_closed", function()
           vim.b.copilot_suggestion_hidden = false
         end)

@@ -219,4 +219,12 @@ return {
       { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
     },
   },
+
+  -- Align
+  {
+    "junegunn/vim-easy-align",
+    keys = {
+      { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" } },
+    },
+  },
 }

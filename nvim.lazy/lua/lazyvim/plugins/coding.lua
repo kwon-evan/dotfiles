@@ -268,7 +268,7 @@ return {
 
   {
     "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
+    event = "VeryLazy",
     config = function()
       vim.keymap.set("i", "<Tab>", function()
         if require("copilot.suggestion").is_visible() then

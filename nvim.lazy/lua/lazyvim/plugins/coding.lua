@@ -233,7 +233,7 @@ return {
       })
     end,
     keys = {
-      { "<F2>", ":SymbolsOutline<CR>" },
+      { "<F2>", "<cmd>SymbolsOutline<CR>" },
     },
   },
 

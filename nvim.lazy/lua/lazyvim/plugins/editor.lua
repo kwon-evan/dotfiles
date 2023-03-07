@@ -227,4 +227,13 @@ return {
       { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" } },
     },
   },
+
+  -- smart column
+  {
+    "m4xshen/smartcolumn.nvim",
+    opts = {
+      disabled_filetypes = { "help", "dashboard", "Lazy", "NvimTree", "Trouble", "TelescopePrompt", "TelescopeResults" },
+    },
+    event = "BufReadPost",
+  },
 }

@@ -54,4 +54,23 @@ return {
       { "<leader>mp", "<cmd>MarkdownPreview<CR>" },
     },
   },
+
+  -- Code Preview
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      local gtp = require("goto-preview")
+      gtp.setup({
+        width = 120,
+        height = 40,
+      })
+    end,
+    keys = {
+      { "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", desc = "Goto Definition" },
+      { "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", desc = "Goto Type Definition" },
+      { "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", desc = "Goto Implementation" },
+      { "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "All Preview Windows Close" },
+      { "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", desc = "Goto References" },
+    },
+  },
 }

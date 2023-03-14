@@ -13,18 +13,6 @@ return {
       history = true,
       delete_check_events = "TextChanged",
     },
-    -- stylua: ignore
-    -- keys = {
-    --   {
-    --     "<tab>",
-    --     function()
-    --       return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-    --     end,
-    --     expr = true, remap = true, silent = true, mode = "i",
-    --   },
-    --   { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-    --   { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    -- },
   },
 
   -- auto completion
@@ -176,54 +164,7 @@ return {
     end,
   },
 
-  -- comments
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
-  {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    config = function()
-      require("mini.comment").setup({
-        hooks = {
-          pre = function()
-            require("ts_context_commentstring.internal").update_commentstring({})
-          end,
-        },
-      })
-    end,
-  },
-
-  -- better text-objects
-  {
-    "echasnovski/mini.ai",
-    keys = {
-      { "a", mode = { "x", "o" } },
-      { "i", mode = { "x", "o" } },
-    },
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          -- no need to load the plugin, since we only need its queries
-          require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-        end,
-      },
-    },
-    config = function()
-      local ai = require("mini.ai")
-      ai.setup({
-        n_lines = 500,
-        custom_textobjects = {
-          o = ai.gen_spec.treesitter({
-            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-          }, {}),
-          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-        },
-      })
-    end,
-  },
-
+  -- code Analysis
   {
     "simrat39/symbols-outline.nvim",
     config = function()
@@ -237,24 +178,7 @@ return {
     },
   },
 
-  {
-    "rmagatti/goto-preview",
-    config = function()
-      local gtp = require("goto-preview")
-      gtp.setup({
-        width = 120,
-        height = 40,
-      })
-    end,
-    keys = {
-      { "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", desc = "Goto Definition" },
-      { "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", desc = "Goto Type Definition" },
-      { "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", desc = "Goto Implementation" },
-      { "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "All Preview Windows Close" },
-      { "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", desc = "Goto References" },
-    },
-  },
-
+  -- Comment
   {
     "numToStr/comment.nvim",
     config = function()
@@ -266,6 +190,7 @@ return {
     },
   },
 
+  -- Code Assistant
   {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",

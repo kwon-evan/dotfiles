@@ -70,7 +70,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     config = function()
-      local navic = require("nvim-navic")
+      -- local navic = require("nvim-navic")
       local lualine = require("lualine")
       local symbols = require("lazyvim.config.settings")
       lualine.setup({
@@ -106,7 +106,7 @@ return {
               },
             },
             { "filename", padding = { left = 1, right = 1 } },
-            { navic.get_location, cond = navic.is_available },
+            -- { navic.get_location, cond = navic.is_available },
           },
           lualine_x = { "lsp_progress" },
         },

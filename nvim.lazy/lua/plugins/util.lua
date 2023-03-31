@@ -23,7 +23,7 @@ return {
   },
 
   -- library used by other plugins
-  "nvim-lua/plenary.nvim",
+  { "nvim-lua/plenary.nvim" },
 
   -- toggle terminal
   {

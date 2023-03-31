@@ -83,7 +83,7 @@ return {
           }),
           formatting = {
             format = function(_, item)
-              local icons = require("lazyvim.config.settings").icons.kinds
+              local icons = require("config.settings").icons.kinds
               if icons[item.kind] then
                 item.kind = icons[item.kind] .. item.kind
               end

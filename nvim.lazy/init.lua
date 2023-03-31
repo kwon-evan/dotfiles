@@ -1,1 +1,1 @@
-require("lazyvim.config.lazy")
+require("config.lazy")

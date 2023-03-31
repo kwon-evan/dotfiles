@@ -1,6 +1,6 @@
 -- This file is automatically loaded by plugins.config
 
-local util = require("lazyvim.util")
+local util = require("util")
 
 -- better up/down
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

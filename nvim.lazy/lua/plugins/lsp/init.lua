@@ -15,16 +15,16 @@ return {
     servers = nil,
     config = function(plugin)
       -- setup formatting and keymaps
-      require("lazyvim.util").on_attach(function(client, buffer)
-        require("lazyvim.plugins.lsp.format").on_attach(client, buffer)
-        require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+      require("util").on_attach(function(client, buffer)
+        require("plugins.lsp.format").on_attach(client, buffer)
+        require("plugins.lsp.keymaps").on_attach(client, buffer)
         -- if client.server_capabilities.documentSymbolProvider then
         --   require("nvim-navic").attach(client, buffer)
         -- end
       end)
 
       -- diagnostics
-      for name, icon in pairs(require("lazyvim.config.settings").icons.diagnostics) do
+      for name, icon in pairs(require("config.settings").icons.diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
@@ -36,7 +36,7 @@ return {
       })
 
       -- lspconfig
-      local servers = plugin.servers or require("lazyvim.plugins.lsp.servers")
+      local servers = plugin.servers or require("plugins.lsp.servers")
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })

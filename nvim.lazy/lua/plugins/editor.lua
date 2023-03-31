@@ -1,4 +1,4 @@
-local util = require("lazyvim.util")
+local util = require("util")
 
 return {
 
@@ -10,7 +10,7 @@ return {
       {
         "<F1>",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+          require("neo-tree.command").execute({ toggle = true, dir = require("util").get_root() })
         end,
         desc = "NeoTree (root dir)",
       },
@@ -28,13 +28,13 @@ return {
   },
 
   -- search/replace in multiple files
-  {
-    "windwp/nvim-spectre",
-    -- stylua: ignore
-    keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
-    },
-  },
+  -- {
+  --   "windwp/nvim-spectre",
+  --   -- stylua: ignore
+  --   keys = {
+  --     { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+  --   },
+  -- },
 
   -- fuzzy finder
   {

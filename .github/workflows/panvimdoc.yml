@@ -9,10 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: panvimdoc
-        uses: kwon-evan/dotfiles/nvim.lazy@main
+        uses: kwon-evan/dotfiles/nvim.lazy
         with:
           vimdoc: dotfiles/nvim.lazy
-          pandoc: nvim.lazy/doc/panvimdoc.md
+          pandoc: dotfiles/nvim.lazy/doc/panvimdoc.md
           treesitter: true
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:

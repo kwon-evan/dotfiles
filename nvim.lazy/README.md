@@ -1,15 +1,4 @@
-# LazyVim
-
-A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nvim)
-
-![image](https://user-images.githubusercontent.com/292349/210136312-c211f781-6d51-46b0-a265-6098bdbb364d.png)
-
-## ✅ Todo
-
-- [ ] documentation
-- [x] treesitter auto-install seems broken. Switch to `ensure_installed` instead?
-- [x] list all plugins in readme
-- [ ] test all-the-things
+# Neovim Configuration
 
 ## File Structure
 
@@ -47,6 +36,7 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 <!-- plugins:start -->
 
 ## Plugins
+TODO: re-write plugins
 
 - [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - [catppuccin](https://github.com/catppuccin/nvim)

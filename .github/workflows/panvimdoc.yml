@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: panvimdoc
-        uses: kwon-evan/dotfiles/nvim.lazy
+        uses: kwon-evan/dotfiles/@main
         with:
           vimdoc: dotfiles/nvim.lazy
           pandoc: dotfiles/nvim.lazy/doc/panvimdoc.md

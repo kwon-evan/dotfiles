@@ -33,6 +33,7 @@ local settings = {
       Unit = " ",
       Value = " ",
       Variable = " ",
+      Copilot = " ",
     },
   },
 }

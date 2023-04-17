@@ -27,10 +27,17 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
+      -- local has_words_before = function()
+      --   unpack = unpack or table.unpack
+      --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      -- end
       local has_words_before = function()
-        unpack = unpack or table.unpack
+        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+          return false
+        end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
       end
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -50,12 +57,13 @@ return {
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<C-e>"] = cmp.mapping.abort(),
-            ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ["<CR>"] = cmp.mapping.confirm({
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = false,
+            }),
             ["<Tab>"] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_next_item()
-              -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-              -- they way you will only jump inside the snippet region
+              if cmp.visible() and has_words_before() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
               elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
               elseif has_words_before() then
@@ -75,6 +83,7 @@ return {
             end, { "i", "s" }),
           }),
           sources = cmp.config.sources({
+            { name = "copilot" },
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "buffer" },
@@ -191,25 +200,44 @@ return {
   },
 
   -- Code Assistant
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     vim.keymap.set("i", "<Tab>", function()
+  --       if require("copilot.suggestion").is_visible() then
+  --         require("copilot.suggestion").accept()
+  --       else
+  --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+  --       end
+  --     end, {
+  --       silent = true,
+  --     })
+  --     require("copilot").setup({
+  --       suggestion = {
+  --         auto_trigger = true,
+  --         accept = false,
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
     config = function()
-      vim.keymap.set("i", "<Tab>", function()
-        if require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
-        else
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-        end
-      end, {
-        silent = true,
-      })
       require("copilot").setup({
-        suggestion = {
-          auto_trigger = true,
-          accept = false,
-        },
+        suggestion = { enabled = false },
+        panel = { enabled = false },
       })
+    end,
+  },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    event = "VeryLazy",
+    dependencies = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
     end,
   },
 }

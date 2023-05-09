@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -25,7 +25,7 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
@@ -38,7 +38,7 @@ local plugins = {
     opts = overrides.nvimtree,
   },
 
-  -- Install a plugin
+  -- better escape
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -46,7 +46,29 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
+  -- code Analysis
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      local so = require "symbols-outline"
+      so.setup {
+        with = 15,
+      }
+    end,
+    keys = {
+      { "<F2>", "<cmd>SymbolsOutline<CR>" },
+    },
+  },
 
+  -- easily jump to any location and enhanced f/t motions for Leap
+  {
+    "ggandor/leap.nvim",
+    event = "VeryLazy",
+    dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
+    config = function()
+      require("leap").add_default_mappings(true)
+    end,
+  },
 }
 
 return plugins

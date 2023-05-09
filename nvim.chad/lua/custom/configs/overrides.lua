@@ -11,9 +11,6 @@ M.treesitter = {
   },
   indent = {
     enable = true,
-    -- disable = {
-    --   "python"
-    -- },
   },
 }
 
@@ -30,7 +27,7 @@ M.mason = {
 
     -- rust
     "rust-analyzer",
-    'rustfmt'
+    "rustfmt",
   },
 }
 
@@ -44,7 +41,7 @@ M.nvimtree = {
     highlight_git = true,
     icons = {
       show = {
-        git = true,
+        git = false,
       },
     },
   },

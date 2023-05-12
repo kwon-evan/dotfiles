@@ -49,15 +49,13 @@ local plugins = {
   -- code Analysis
   {
     "simrat39/symbols-outline.nvim",
+    event = "BufEnter",
     config = function()
       local so = require "symbols-outline"
       so.setup {
         with = 15,
       }
     end,
-    keys = {
-      { "<F2>", "<cmd>SymbolsOutline<CR>" },
-    },
   },
 
   -- easily jump to any location and enhanced f/t motions for Leap
@@ -69,6 +67,45 @@ local plugins = {
       require("leap").add_default_mappings(true)
     end,
   },
+
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    opts = overrides.copilot,
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
+    },
+    opts = {
+      sources = {
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "copilot",  group_index = 2 },
+        { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2 },
+        { name = "nvim_lua", group_index = 2 },
+        { name = "path",     group_index = 2 },
+      },
+    },
+  },
+
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      local gtp = require("goto-preview")
+      gtp.setup({
+        width = 120,
+        height = 40,
+      })
+    end,
+  }
 }
 
 return plugins

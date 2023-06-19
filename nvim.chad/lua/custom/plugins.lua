@@ -99,13 +99,22 @@ local plugins = {
   {
     "rmagatti/goto-preview",
     config = function()
-      local gtp = require("goto-preview")
-      gtp.setup({
+      local gtp = require "goto-preview"
+      gtp.setup {
         width = 120,
         height = 40,
-      })
+      }
     end,
-  }
+  },
+
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    event = "BufEnter",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+
 }
 
 return plugins

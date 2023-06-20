@@ -31,15 +31,15 @@ M.GotoPreview = {
 M.SnipRun = {
   n = {
     -- run current file
-    ["<C-r>"] = { "<cmd>SnipRun<CR>j", "run current file" },
+    ["<C-t>"] = { "<cmd>SnipRun<CR>j", "run current file" },
   },
   s = {
     -- run current selection
-    ["<C-r>"] = { "<cmd>SnipRun<CR>j", "run current selection" },
+    ["<C-t>"] = { "<cmd>SnipRun<CR>j", "run current selection" },
   },
   v = {
     -- run current visual selection
-    ["<C-r>"] = { "<cmd>SnipRun<CR>j", "run current visual selection" },
+    ["<C-t>"] = { "<cmd>SnipRun<CR>j", "run current visual selection" },
   },
 }
 

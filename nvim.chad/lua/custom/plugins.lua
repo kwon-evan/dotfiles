@@ -87,11 +87,11 @@ local plugins = {
     opts = {
       sources = {
         { name = "nvim_lsp", group_index = 2 },
-        { name = "copilot", group_index = 2 },
-        { name = "luasnip", group_index = 2 },
-        { name = "buffer", group_index = 2 },
+        { name = "copilot",  group_index = 2 },
+        { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
-        { name = "path", group_index = 2 },
+        { name = "path",     group_index = 2 },
       },
     },
   },
@@ -112,23 +112,6 @@ local plugins = {
     event = "BufEnter",
     config = function()
       require("lsp_lines").setup()
-    end,
-  },
-
-  {
-    "michaelb/sniprun",
-    event = "BufEnter",
-    build = "sh install.sh",
-    config = function()
-      require("sniprun").setup {
-        repl_enable = { "Python3_original" },
-        display = {
-          -- "Classic",
-          "VirtualTextOk",
-          "VirtualTextErr",
-          "TerminalWithCode",
-        },
-      }
     end,
   },
 

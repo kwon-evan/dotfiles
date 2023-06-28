@@ -43,4 +43,10 @@ M.SnipRun = {
   },
 }
 
+M.MarkdownPreview = {
+  n = {
+    ["<leader>mp"] = { "<cmd>MarkdownPreview<CR>", "toggle markdown preview" },
+  },
+}
+
 return M

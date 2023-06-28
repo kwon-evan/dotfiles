@@ -11,7 +11,6 @@ M.general = {
   },
 }
 
--- more keybinds!
 M.SymbolsOutline = {
   n = {
     ["<F2>"] = { "<cmd>SymbolsOutline<CR>", "toggle symbols outline" },
@@ -31,12 +30,6 @@ M.GotoPreview = {
 M.MarkdownPreview = {
   n = {
     ["<leader>mp"] = { "<cmd>MarkdownPreview<CR>", "toggle markdown preview" },
-  },
-}
-
-M.LspLines = {
-  n = {
-    ["<leader>ll"] = { "<cmd>LspLines<CR>", "toggle lsp diagnostics" },
   },
 }
 

@@ -4,7 +4,6 @@ local overrides = require "custom.configs.overrides"
 local plugins = {
 
   -- Override plugin definition options
-
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -46,6 +45,7 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
+
   -- code Analysis
   {
     "simrat39/symbols-outline.nvim",
@@ -68,12 +68,14 @@ local plugins = {
     end,
   },
 
+  -- code assistant
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
     opts = overrides.copilot,
   },
 
+  -- completion with copilot
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -96,6 +98,7 @@ local plugins = {
     },
   },
 
+  -- floating window preview
   {
     "rmagatti/goto-preview",
     config = function()
@@ -107,14 +110,7 @@ local plugins = {
     end,
   },
 
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = "BufEnter",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  },
-
+  -- edit markdown in neovim
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",

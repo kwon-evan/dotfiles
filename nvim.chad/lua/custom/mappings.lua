@@ -34,4 +34,10 @@ M.MarkdownPreview = {
   },
 }
 
+M.LspLines = {
+  n = {
+    ["<leader>ll"] = { "<cmd>LspLines<CR>", "toggle lsp diagnostics" },
+  },
+}
+
 return M

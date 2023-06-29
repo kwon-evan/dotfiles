@@ -33,4 +33,15 @@ M.MarkdownPreview = {
   },
 }
 
+M.NvimTmuxNavigation = {
+  n = {
+    ["<C-j>"] = { "<cmd>NvimTmuxNavigateDown<CR>", "tmux navigate down" },
+    ["<C-k>"] = { "<cmd>NvimTmuxNavigateUp<CR>", "tmux navigate up" },
+    ["<C-h>"] = { "<cmd>NvimTmuxNavigateLeft<CR>", "tmux navigate left" },
+    ["<C-l>"] = { "<cmd>NvimTmuxNavigateRight<CR>", "tmux navigate right" },
+    ["<C-\\>"] = { "<cmd>NvimTmuxNavigateLastActive<CR>", "tmux navigate previous" },
+    ["<C-Space>"] = { "<cmd>NvimTmuxNavigateNext<CR>", "tmux navigate next" },
+  },
+}
+
 return M

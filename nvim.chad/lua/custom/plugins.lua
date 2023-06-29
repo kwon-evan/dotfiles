@@ -120,7 +120,7 @@ local plugins = {
   -- Neovim-Tmux navigation
   {
     "alexghergh/nvim-tmux-navigation",
-    event = "BufEnter",
+    event = "VeryLazy",
     config = function()
       local nvim_tmux_nav = require "nvim-tmux-navigation"
       nvim_tmux_nav.setup {

@@ -37,6 +37,14 @@ local plugins = {
     opts = overrides.nvimtree,
   },
 
+  {
+    "folke/trouble.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = overrides.trouble,
+  },
+
   -- better escape
   {
     "max397574/better-escape.nvim",

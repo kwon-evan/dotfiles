@@ -23,13 +23,14 @@ M.mason = {
     -- python
     "pyright",
     "black",
-    "ruff-lsp",
 
     -- rust
     "rust-analyzer",
     -- "rustfmt", deprecated
   },
 }
+
+M.trouble = {}
 
 -- git support in nvimtree
 M.nvimtree = {

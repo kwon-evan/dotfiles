@@ -14,6 +14,7 @@ local sources = {
   b.formatting.stylua,
 
   -- python
+  b.diagnostics.ruff,
   b.formatting.black,
 
   -- rust

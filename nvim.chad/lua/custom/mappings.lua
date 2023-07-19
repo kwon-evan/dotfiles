@@ -11,6 +11,12 @@ M.general = {
   },
 }
 
+M.Trouble = {
+  n = {
+    ["<leader>tr"] = { "<cmd>TroubleToggle<CR>", "check all the troubles your code is causing" }
+  }
+}
+
 M.SymbolsOutline = {
   n = {
     ["<F2>"] = { "<cmd>SymbolsOutline<CR>", "toggle symbols outline" },

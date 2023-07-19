@@ -7,14 +7,13 @@ end
 local b = null_ls.builtins
 
 local sources = {
-
   -- webdev stuff
   b.formatting.prettier.with { filetypes = { "json", "markdown", "yaml", "toml" } },
 
   -- Lua
   b.formatting.stylua,
 
-  -- cpp
+  -- python
   b.formatting.black,
 
   -- rust

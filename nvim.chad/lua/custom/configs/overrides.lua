@@ -16,7 +16,6 @@ M.treesitter = {
 
 M.mason = {
   ensure_installed = {
-
     -- lua
     "lua-language-server",
     "stylua",
@@ -24,10 +23,11 @@ M.mason = {
     -- python
     "pyright",
     "black",
+    "ruff-lsp",
 
     -- rust
     "rust-analyzer",
-    "rustfmt",
+    -- "rustfmt", deprecated
   },
 }
 

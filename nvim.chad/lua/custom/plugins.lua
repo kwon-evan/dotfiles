@@ -46,26 +46,10 @@ local plugins = {
     end,
   },
 
-  -- code Analysis
+  -- f to jump
   {
-    "simrat39/symbols-outline.nvim",
-    event = "BufEnter",
-    config = function()
-      local so = require "symbols-outline"
-      so.setup {
-        with = 15,
-      }
-    end,
-  },
-
-  -- easily jump to any location and enhanced f/t motions for Leap
-  {
-    "ggandor/leap.nvim",
+    "ggandor/flit.nvim",
     event = "VeryLazy",
-    dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
-    config = function()
-      require("leap").add_default_mappings(true)
-    end,
   },
 
   -- code assistant
@@ -89,11 +73,11 @@ local plugins = {
     opts = {
       sources = {
         { name = "nvim_lsp", group_index = 2 },
-        { name = "copilot",  group_index = 2 },
-        { name = "luasnip",  group_index = 2 },
-        { name = "buffer",   group_index = 2 },
+        { name = "copilot", group_index = 2 },
+        { name = "luasnip", group_index = 2 },
+        { name = "buffer", group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
-        { name = "path",     group_index = 2 },
+        { name = "path", group_index = 2 },
       },
     },
   },

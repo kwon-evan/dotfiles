@@ -18,7 +18,7 @@ $character\
 """
 
 [os]
-format = "[$symbol]($style)"
+format = "[$symbol ]($style)"
 style = "bold white"
 disabled = false
 

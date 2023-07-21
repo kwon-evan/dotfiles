@@ -11,9 +11,10 @@ M.general = {
   },
 }
 
+
 M.Trouble = {
   n = {
-    ["<leader>tr"] = { "<cmd>TroubleToggle<CR>", "check all the troubles your code is causing" }
+    ["<leader>tr"] = { "<cmd>TroubleToggle<CR>", "check all the troubles your code is causing" },
   }
 }
 

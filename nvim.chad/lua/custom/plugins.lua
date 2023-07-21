@@ -45,6 +45,22 @@ local plugins = {
     opts = overrides.trouble,
   },
 
+  -- nice, noise, notice
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = overrides.noice,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "rcarriga/nvim-notify",
+        config = function()
+          require("notify").setup(overrides.notify)
+        end,
+      },
+    },
+  },
+
   -- better escape
   {
     "max397574/better-escape.nvim",
@@ -81,11 +97,11 @@ local plugins = {
     opts = {
       sources = {
         { name = "nvim_lsp", group_index = 2 },
-        { name = "copilot", group_index = 2 },
-        { name = "luasnip", group_index = 2 },
-        { name = "buffer", group_index = 2 },
+        { name = "copilot",  group_index = 2 },
+        { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
-        { name = "path", group_index = 2 },
+        { name = "path",     group_index = 2 },
       },
     },
   },

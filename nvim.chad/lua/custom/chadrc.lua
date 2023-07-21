@@ -2,6 +2,7 @@
 local M = {}
 
 M.ui = {
+  extended_integrations = { "notify" },
   theme = "oxocarbon",
   transparency = true,
   telescope = { style = "bordered" },
@@ -14,7 +15,10 @@ M.ui = {
     theme = "vscode",
     separator_style = "block",
   },
-  nvdash = { load_on_startup = true },
+
+  nvdash = {
+    load_on_startup = true,
+  },
 }
 
 M.plugins = "custom.plugins"

@@ -2,7 +2,9 @@
 
 ~/.config  
 　　├── starship.toml  
-　　└── nvim.chad
+　　├── .tmux.conf  
+　　├── setup.sh  
+　　└── nvchad_config/
 
 ## Requirements
 
@@ -15,7 +17,7 @@
 ## Installation
 
 ```bash
-git clone https://github.com/kwon-evan/dotfiles.git ~/dotfiles/
-ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
-ln -s ~/dotfiles/nvim.chad/ ~/.config/nvim
+git clone https://github.com/kwon-evan/dotfiles.git ~/dotfiles/ --depth 1
+cd ~/dotfiles/
+./setup.sh
 ```

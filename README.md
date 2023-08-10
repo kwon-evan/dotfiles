@@ -1,6 +1,6 @@
 # DOTFILES
 
-![image](./assets/screen_shot_1.png)![image](./assets/screen_shot_2.png)
+![image](./assets/screen_shot_1.png)
 
 ~/.config  
 　　├── starship.toml  

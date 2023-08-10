@@ -1,12 +1,18 @@
-# .config
+# DOTFILES
 
 ~/.config  
 　　├── starship.toml  
-　　├── nvim.chad  
-　　├── ~~nvim.lazy~~  
-　　└── ~~nvim.packer~~
+　　└── nvim.chad
 
-## DO
+## Requirements
+
+- Neovim > 0.9.0
+- [Nerd Font](https://www.nerdfonts.com/)
+- [Ripgrep](https://github.com/BurntSushi/ripgrep)
+- npm
+- treesitter
+
+## Installation
 
 ```bash
 git clone https://github.com/kwon-evan/dotfiles.git ~/dotfiles/

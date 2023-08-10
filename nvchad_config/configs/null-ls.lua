@@ -19,6 +19,9 @@ local sources = {
 
   -- rust
   b.formatting.rustfmt,
+
+  -- bash
+  b.formatting.beautysh
 }
 
 local async_formatting = function(bufnr)

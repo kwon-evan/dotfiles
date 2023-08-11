@@ -22,6 +22,7 @@ M.mason = {
 
     -- python
     "pyright",
+    "ruff",
     "black",
 
     -- rust
@@ -29,7 +30,10 @@ M.mason = {
 
     -- bash
     "bash-language-server",
-    "beautysh"
+    "beautysh",
+
+    -- etc
+    "prettier",
   },
 }
 

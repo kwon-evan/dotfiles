@@ -19,7 +19,5 @@
 ## Installation
 
 ```bash
-git clone https://github.com/kwon-evan/dotfiles.git ~/dotfiles/ --depth 1
-cd ~/dotfiles/
-./setup.sh
+git clone https://github.com/kwon-evan/dotfiles.git ~/dotfiles/ --depth 1 && ~/dotfiles/setup.sh
 ```

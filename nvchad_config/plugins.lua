@@ -136,6 +136,23 @@ local plugins = {
       }
     end,
   },
+
+  {
+    'renerocksai/telekasten.nvim',
+    event = 'BufRead',
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      'renerocksai/calendar-vim',
+    },
+    config = function()
+      local telekasten = require('telekasten')
+      telekasten.setup({
+        home = vim.fn.expand('~/문서/Obsidian Vault/')
+      })
+    end
+  },
+
+  -- TODO: add telescope plugins
 }
 
 return plugins

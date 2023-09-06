@@ -1,5 +1,4 @@
 local overrides = require("custom.configs.overrides")
-
 ---@type NvPluginSpec[]
 local plugins = {
 
@@ -45,6 +44,21 @@ local plugins = {
     opts = overrides.trouble,
   },
 
+  -- -- completion
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   opts = {
+  --     sources = {
+  --       { name = "codeium",  group_index = 1 },
+  --       { name = "nvim_lsp", group_index = 2 },
+  --       { name = "luasnip",  group_index = 2 },
+  --       { name = "buffer",   group_index = 2 },
+  --       { name = "nvim_lua", group_index = 2 },
+  --       { name = "path",     group_index = 2 },
+  --     },
+  --   },
+  -- },
+
   -- nice, noise, notice
   {
     "folke/noice.nvim",
@@ -74,36 +88,6 @@ local plugins = {
   {
     "ggandor/flit.nvim",
     event = "VeryLazy",
-  },
-
-  -- code assistant
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = overrides.copilot,
-  },
-
-  -- completion with copilot
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
-    },
-    opts = {
-      sources = {
-        { name = "nvim_lsp", group_index = 2 },
-        { name = "copilot",  group_index = 2 },
-        { name = "luasnip",  group_index = 2 },
-        { name = "buffer",   group_index = 2 },
-        { name = "nvim_lua", group_index = 2 },
-        { name = "path",     group_index = 2 },
-      },
-    },
   },
 
   -- floating window preview
@@ -137,6 +121,7 @@ local plugins = {
     end,
   },
 
+  -- telekasten
   {
     "renerocksai/telekasten.nvim",
     lazy = false,
@@ -152,7 +137,31 @@ local plugins = {
     end,
   },
 
-  -- TODO: add telescope plugins
+  -- codeium
+  {
+    "Exafunction/codeium.vim",
+    event = "BufEnter",
+  },
+
+  -- {
+  -- 	"jcdickinson/http.nvim",
+  -- 	build = "cargo build --workspace --release",
+  -- },
+
+  -- codeium
+  -- { "jcdickinson/http.nvim", build = "cargo build --workspace --release" },
+  -- {
+  --   "jcdickinson/codeium.nvim",
+  --   event = "InsertEnter",
+  --   dependencies = {
+  --     "jcdickinson/http.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup({})
+  --   end,
+  -- },
 }
 
 return plugins

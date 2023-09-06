@@ -1,89 +1,68 @@
 local M = {}
 
 M.treesitter = {
-	ensure_installed = {
-		"vim",
-		"lua",
-		"markdown",
-		"markdown_inline",
-		"python",
-		"rust",
-	},
-	indent = {
-		enable = true,
-	},
+  ensure_installed = {
+    "vim",
+    -- text
+    "markdown",
+    "markdown_inline",
+    "yaml",
+    "toml",
+    -- shell
+    "bash",
+    -- programming
+    "lua",
+    "python",
+    "rust",
+  },
+  indent = {
+    enable = true,
+  },
 }
 
 M.mason = {
-	ensure_installed = {
-		-- lua
-		"lua-language-server",
-		"stylua",
-
-		-- python
-		"pyright",
-		"ruff",
-		"black",
-
-		-- rust
-		"rust-analyzer",
-
-		-- bash
-		"bash-language-server",
-		"beautysh",
-
-		-- etc
-		"prettier",
-	},
+  ensure_installed = {
+    -- lua
+    "lua-language-server",
+    "stylua",
+    -- python
+    "pyright",
+    "ruff",
+    "black",
+    -- rust
+    "rust-analyzer",
+    -- bash
+    "bash-language-server",
+    "beautysh",
+    -- etc
+    "prettier",
+  },
 }
 
 M.notify = {
-	background_colour = "#000000",
+  render = "compact",
+  on_open = function(win)
+    vim.api.nvim_win_set_config(win, { border = "none" })
+  end,
 }
 
 M.noice = {
-	lsp = {
-		override = {
-			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-			["vim.lsp.util.stylize_markdown"] = true,
-			["cmp.entry.get_documentation"] = true,
-		},
-		progress = { enabled = false },
-		signature = { enabled = false },
-		hover = { enabled = false },
-	},
-	presets = {
-		long_message_to_split = true, -- long messages will be sent to a split
-		inc_rename = true, -- enables an input dialog for inc-rename.nvim
-		lsp_doc_border = true, -- add a border to hover docs and signature help
-	},
+  cmdline = { view = "cmdline" },
+  presets = {
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = true,          -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = true,      -- add a border to hover docs and signature help
+  },
 }
 
 -- git support in nvimtree
 M.nvimtree = {
-	git = {
-		enable = true,
-	},
+  git = { enable = true },
 
-	renderer = {
-		highlight_git = true,
-		icons = {
-			show = {
-				git = false,
-			},
-		},
-	},
-}
-
-M.copilot = {
-	-- Possible configurable fields can be found on:
-	-- https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
-	suggestion = {
-		enable = false,
-	},
-	panel = {
-		enable = false,
-	},
+  renderer = {
+    highlight_git = true,
+    icons = { show = { git = false } },
+  },
 }
 
 return M

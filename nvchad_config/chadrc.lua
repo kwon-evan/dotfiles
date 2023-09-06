@@ -3,11 +3,11 @@ local M = {}
 
 M.ui = {
   extended_integrations = { "notify" },
-  theme = "chadracula",
-  transparency = true,
-  telescope = { style = "bordered" },
+  theme = "oxocarbon",
+  telescope = { style = "borderless" },
   cmp = {
-    style = "default",
+    lspkind_text = false,
+    style = "atom",
     selected_item_bg = "simple",
   },
 
@@ -23,6 +23,6 @@ M.ui = {
 
 M.plugins = "custom.plugins"
 
-M.mappings = require "custom.mappings"
+M.mappings = require("custom.mappings")
 
 return M

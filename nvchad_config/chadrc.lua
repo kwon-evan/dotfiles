@@ -18,6 +18,12 @@ M.ui = {
 
   nvdash = {
     load_on_startup = true,
+    -- TODO: update this!
+    header = {
+      "                                 ",
+      "             NEOVIM              ",
+      "                                 ",
+    }
   },
 }
 

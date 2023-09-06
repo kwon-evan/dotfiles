@@ -3,8 +3,9 @@ local M = {}
 
 M.ui = {
   extended_integrations = { "notify" },
-  theme = "oxocarbon",
+  theme = "chadracula",
   telescope = { style = "borderless" },
+  transparency = true,
   cmp = {
     lspkind_text = false,
     style = "atom",

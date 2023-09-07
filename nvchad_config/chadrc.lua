@@ -1,6 +1,8 @@
 ---@type ChadrcConfig
 local M = {}
 
+vim.opt.scrolloff = 12
+
 M.ui = {
   extended_integrations = { "notify" },
   theme = "chadracula",

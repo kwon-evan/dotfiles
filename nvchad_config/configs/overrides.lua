@@ -41,7 +41,7 @@ M.mason = {
 
 M.notify = {
   -- background_colour = "#000000",
-  -- render = "compact",
+  render = "compact",
   on_open = function(win)
     vim.api.nvim_win_set_config(win, { border = "none" })
   end,
@@ -56,6 +56,7 @@ M.noice = {
   },
   lsp = {
     signature = { enabled = false },
+    progress = { enabled = false },
     hover = { enabled = false },
   },
 }

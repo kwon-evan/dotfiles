@@ -40,8 +40,8 @@ M.mason = {
 }
 
 M.notify = {
-  background_colour = "#000000",
-  render = "compact",
+  -- background_colour = "#000000",
+  -- render = "compact",
   on_open = function(win)
     vim.api.nvim_win_set_config(win, { border = "none" })
   end,
@@ -55,8 +55,13 @@ M.noice = {
     lsp_doc_border = false,       -- add a border to hover docs and signature help
   },
   lsp = {
-    signature = { enabled = false },
-    hover = { enabled = false }
+    signaaure = { enabled = false },
+    hover = { enabled = false },
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
   },
 }
 

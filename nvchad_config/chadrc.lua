@@ -5,9 +5,7 @@ vim.opt.scrolloff = 12
 
 M.ui = {
   extended_integrations = { "notify" },
-  theme = "chadracula",
-  telescope = { style = "borderless" },
-  transparency = true,
+  theme = "pastelbeans",
   cmp = {
     lspkind_text = false,
     style = "atom",

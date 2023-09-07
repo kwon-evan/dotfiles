@@ -67,4 +67,10 @@ M.Telekasten = {
   },
 }
 
+M.ZenMode = {
+  n = {
+    ["<leader>zm"] = { "<cmd>ZenMode<CR>", "toggle zen mode" },
+  },
+}
+
 return M

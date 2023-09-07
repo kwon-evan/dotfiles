@@ -47,9 +47,10 @@ local plugins = {
 	-- -- completion
 	-- {
 	--   "hrsh7th/nvim-cmp",
+	--   commit = "6c84bc75c64f778e9f1dcb798ed41c7fcb93b639", -- lock update (break codeium)
 	--   opts = {
 	--     sources = {
-	--       { name = "codeium",  group_index = 1 },
+	--       { name = "codeium",  group_index = 2 },
 	--       { name = "nvim_lsp", group_index = 2 },
 	--       { name = "luasnip",  group_index = 2 },
 	--       { name = "buffer",   group_index = 2 },
@@ -144,12 +145,7 @@ local plugins = {
 		event = "BufEnter",
 	},
 
-	-- {
-	-- 	"jcdickinson/http.nvim",
-	-- 	build = "cargo build --workspace --release",
-	-- },
-
-	-- codeium
+	-- -- codeium
 	-- { "jcdickinson/http.nvim", build = "cargo build --workspace --release" },
 	-- {
 	--   "jcdickinson/codeium.nvim",

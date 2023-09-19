@@ -80,3 +80,17 @@ if [ -e "${CONFIG_PATH}/starship.toml" ]; then
 else
     ln -s ${PWD}/starship.toml ${CONFIG_PATH}/starship.toml
 fi
+
+# link yazi config
+if [ -e "${CONFIG_PATH}/yazi" ]; then
+    echo "[INFO] yazi config already exists"
+else
+    ln -s ${PWD}/yazi ${CONFIG_PATH}/yazi
+fi
+
+# link wezterm config
+if [ -e "${CONFIG_PATH}/wezterm" ]; then
+    echo "[INFO] wezterm already exists"
+else
+    ln -s ${PWD}/wezterm ${CONFIG_PATH}/wezterm
+fi

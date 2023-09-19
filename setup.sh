@@ -60,18 +60,11 @@ CONFIG_PATH="${HOME}/.config"
 install_starship
 install_neovim
 
-# Clone NvChad
-if [ -e "${CONFIG_PATH}/nvim" ]; then
-    echo "[INFO] NvChad already exists"
-else
-    git clone https://github.com/NvChad/NvChad ${CONFIG_PATH}/nvim --depth 1
-fi
-
-# link config
-if [ -e "${CONFIG_PATH}/nvim/lua/custom" ]; then
+# link neovim config
+if [ -e "${CONFIG_PATH}/nvim/" ]; then
     echo "[INFO] nvchad_config already exists"
 else
-    ln -s ${PWD}/nvchad_config ${CONFIG_PATH}/nvim/lua/custom
+    ln -s ${PWD}/nvim ${CONFIG_PATH}/nvim
 fi
 
 # link starship config

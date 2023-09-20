@@ -139,7 +139,7 @@ local plugins = {
 
   -- codeium
   {
-    "jcdickinson/codeium.nvim",
+    "Exafunction/codeium.nvim",
     event = "InsertEnter",
     dependencies = {
       {

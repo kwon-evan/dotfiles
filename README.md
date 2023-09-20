@@ -6,9 +6,9 @@
 　　├── starship.toml  
 　　├── .tmux.conf  
 　　├── setup.sh  
-　　├── yazi/
-　　├── wezterm/
-　　└── nvim/
+　　├── yazi/  
+　　├── wezterm/  
+　　└── nvim/  
 
 ## Requirements
 

@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 ---@type NvPluginSpec[]
 local plugins = {
   -- Override plugin definition options
@@ -9,13 +9,13 @@ local plugins = {
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require("custom.configs.null-ls")
+          require "custom.configs.null-ls"
         end,
       },
     },
     config = function()
-      require("plugins.configs.lspconfig")
-      require("custom.configs.lspconfig")
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
 
@@ -93,11 +93,11 @@ local plugins = {
   {
     "rmagatti/goto-preview",
     config = function()
-      local gtp = require("goto-preview")
-      gtp.setup({
+      local gtp = require "goto-preview"
+      gtp.setup {
         width = 120,
         height = 40,
-      })
+      }
     end,
   },
 
@@ -113,10 +113,10 @@ local plugins = {
     "alexghergh/nvim-tmux-navigation",
     event = "VeryLazy",
     config = function()
-      local nvim_tmux_nav = require("nvim-tmux-navigation")
-      nvim_tmux_nav.setup({
+      local nvim_tmux_nav = require "nvim-tmux-navigation"
+      nvim_tmux_nav.setup {
         disable_when_zoomed = true,
-      })
+      }
     end,
   },
 
@@ -130,10 +130,10 @@ local plugins = {
       "renerocksai/calendar-vim",
     },
     config = function()
-      local telekasten = require("telekasten")
-      telekasten.setup({
-        home = vim.fn.expand("~/문서/Obsidian Vault/"),
-      })
+      local telekasten = require "telekasten"
+      telekasten.setup {
+        home = vim.fn.expand "~/문서/Obsidian Vault/",
+      }
     end,
   },
 
@@ -142,10 +142,6 @@ local plugins = {
     "Exafunction/codeium.nvim",
     event = "InsertEnter",
     dependencies = {
-      {
-        "jcdickinson/http.nvim",
-        build = "cargo build --workspace --release"
-      },
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
     },

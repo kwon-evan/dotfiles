@@ -1,13 +1,13 @@
 local function map(mode, lhs, rhs, opts)
-  -- set default value if not specify
-  if opts.noremap == nil then
-    opts.noremap = true
-  end
-  if opts.silent == nil then
-    opts.silent = true
-  end
+	-- set default value if not specify
+	if opts.noremap == nil then
+		opts.noremap = true
+	end
+	if opts.silent == nil then
+		opts.silent = true
+	end
 
-  vim.keymap.set(mode, lhs, rhs, opts)
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 vim.g.mapleader = " "
@@ -26,9 +26,9 @@ map("n", "<C-b>", "<C-b>zz", {})
 map("n", "<C-f>", "<C-f>zz", {})
 
 -- leader movements
-map("n", "<Leader>w", ":write<CR>", {})
-map("n", "<Leader>s", ":source %<CR>", {})
-map("n", "<Leader>v", ":cd ~/.config/nvim/<CR>:Telescope find_files<CR>", {})
+map("n", "<Leader>w", "<cmd>write<CR>", { desc = "Save file" })
+map("n", "<Leader>s", "<cmd>source %<CR>", { desc = "Reload file" })
+map("n", "<Leader>v", "<cmd>cd ~/.config/nvim/<CR>:Telescope find_files<CR>", { desc = "Open config dir" })
 
 -- window movements
 map("n", "<C-k>", "<C-w>k", {})
@@ -38,6 +38,9 @@ map("n", "<C-l>", "<C-w>l", {})
 map("n", "<C-c>", "<C-w>c", {})
 
 -- buffer
-map("n", "<Tab>", ":bnext<CR>", {})
-map("n", "<S-Tab>", ":bprev<CR>", {})
-map("n", "<Leader>x", ":bd<CR>", {})
+map("n", "<Tab>", "<cmd>bnext<CR>", {})
+map("n", "<S-Tab>", "<cmd>bprev<CR>", {})
+map("n", "<Leader>x", "<cmd>bd<CR>", { desc = "Close buffer" })
+
+-- escape terminal mode with esc
+map("t", "<Esc>", "<C-\\><C-n>", {})

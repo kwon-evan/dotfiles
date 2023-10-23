@@ -32,3 +32,6 @@ vim.opt.guicursor = ""
 vim.opt.termguicolors = true
 
 vim.opt.cmdheight = 0
+
+-- yank to system clipboard
+vim.opt.clipboard = "unnamedplus"

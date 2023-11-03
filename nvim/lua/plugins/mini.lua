@@ -27,10 +27,10 @@ return {
     end,
     keys = {
       -- File Explorer
-      { "<leader>f", "<cmd>lua MiniFiles.open()<cr>", mode = "n" , desc = "File Explorer" },
+      { "<leader>f", "<cmd>lua MiniFiles.open()<cr>", mode = "n", desc = "File Explorer" },
       -- buffer nav
-      { "<tab>",     "<cmd>bnext<cr>",                mode = "n" , desc = "Next Buffer" },
-      { "<S-tab>",   "<cmd>bprev<cr>",                mode = "n" , desc = "Prev Buffer" },
+      { "<tab>",     "<cmd>bnext<cr>",                mode = "n", desc = "Next Buffer" },
+      { "<S-tab>",   "<cmd>bprev<cr>",                mode = "n", desc = "Prev Buffer" },
     },
   },
 }

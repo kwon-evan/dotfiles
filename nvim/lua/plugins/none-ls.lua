@@ -43,15 +43,16 @@ return {
       local sources = {
         -- webdev stuff
         b.formatting.prettier.with({ filetypes = { "json", "markdown", "yaml", "toml" } }),
-        b.diagnostics.eslint,
-        b.formatting.eslint,
+        b.code_actions.eslint_d,
+        b.diagnostics.eslint_d,
+        b.formatting.eslint_d,
 
         -- Lua
         b.formatting.stylua,
 
         -- python
         b.diagnostics.ruff,
-        b.formatting.black,
+        b.formatting.ruff_format,
 
         -- rust
         b.formatting.rustfmt,

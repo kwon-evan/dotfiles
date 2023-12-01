@@ -52,7 +52,7 @@ return {
 
         -- python
         b.diagnostics.ruff,
-        b.formatting.ruff,
+        b.formatting.ruff_format,
 
         -- rust
         b.formatting.rustfmt,

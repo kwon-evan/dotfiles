@@ -18,7 +18,7 @@ local languages = {
 	"lua_ls",
 	-- python
 	"pyright",
-	"ruff_lsp",
+	-- "ruff_lsp",
 	-- rust
 	"rust_analyzer",
 	-- bash

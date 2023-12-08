@@ -1,6 +1,6 @@
 return {
   {
-    "Exafunction/codeium.nvim",
+    "kwon-evan/codeium.nvim",
     event = "InsertEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",

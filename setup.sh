@@ -22,7 +22,7 @@ install_brew() {
     fi
 
     echo "[INFO] Installing brew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    $SHELL -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 install_neovim() {

@@ -1,7 +1,5 @@
 # DOTFILES
 
-![image](./assets/screen_shot_1.png)
-
 ~/.config  
 　　├── starship.toml  
 　　├── .tmux.conf  
@@ -17,6 +15,7 @@
 - [Ripgrep](https://github.com/BurntSushi/ripgrep)
 - npm
 - treesitter
+- fzf
 
 ## Installation
 

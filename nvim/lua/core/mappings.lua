@@ -1,13 +1,13 @@
 local function map(mode, lhs, rhs, opts)
-	-- set default value if not specify
-	if opts.noremap == nil then
-		opts.noremap = true
-	end
-	if opts.silent == nil then
-		opts.silent = true
-	end
+  -- set default value if not specify
+  if opts.noremap == nil then
+    opts.noremap = true
+  end
+  if opts.silent == nil then
+    opts.silent = true
+  end
 
-	vim.keymap.set(mode, lhs, rhs, opts)
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 vim.g.mapleader = " "
@@ -44,3 +44,6 @@ map("n", "<Leader>x", "<cmd>bd<CR>", { desc = "Close buffer" })
 
 -- escape terminal mode with esc
 map("t", "<Esc>", "<C-\\><C-n>", {})
+
+-- select all
+map("n", "<C-a>", "ggVG", {})

@@ -49,3 +49,6 @@ map("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true })
 
 -- select all
 map("n", "<C-a>", "ggVG", {})
+
+-- search selected text
+map("v", "<C-f>", "y/<C-r>0<CR>", { desc = "Search selected text", noremap = true, silent = true })

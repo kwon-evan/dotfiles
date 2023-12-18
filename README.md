@@ -12,7 +12,7 @@
 
 - Neovim > 0.9.0
 - [Nerd Font](https://www.nerdfonts.com/)
-- [Ripgrep](https://github.com/BurntSushi/ripgrep)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
 - npm
 - treesitter
 - fzf

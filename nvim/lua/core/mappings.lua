@@ -44,6 +44,8 @@ map("n", "<Leader>x", "<cmd>bd<CR>", { desc = "Close buffer" })
 
 -- escape terminal mode with esc
 map("t", "<Esc>", "<C-\\><C-n>", {})
+-- clear highlight with esc
+map("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true })
 
 -- select all
 map("n", "<C-a>", "ggVG", {})

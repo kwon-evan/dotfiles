@@ -28,7 +28,7 @@ vim.opt.timeoutlen = 300
 
 vim.opt.termguicolors = true
 
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
 
 -- yank to system clipboard
 vim.opt.clipboard = "unnamedplus"

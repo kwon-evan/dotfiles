@@ -35,15 +35,13 @@ return {
   {
     'romgrk/barbar.nvim',
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      -- 'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      'lewis6991/gitsigns.nvim',
     },
     init = function() vim.g.barbar_auto_setup = false end,
-    opts = { 
+    opts = {
       animation = false,
       icons = { separator = { left = '', right = '' } }
     },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
   -- window bar
   {
@@ -52,14 +50,12 @@ return {
     version = "*",
     dependencies = {
       "SmiteshP/nvim-navic",
-      -- "nvim-tree/nvim-web-devicons", -- optional dependency
     },
     opts = {},
   },
   -- file explorer
   {
     "stevearc/oil.nvim",
-    -- dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = { { "-", "<CMD>Oil<CR>", desc = "Open File Explorer" } },
     config = function()
       require("oil").setup({
@@ -87,4 +83,3 @@ return {
     }
   }
 }
-

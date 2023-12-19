@@ -1,10 +1,11 @@
 return {
+  -- code completion
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-path",
+      "FelipeLema/cmp-async-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "L3MON4D3/LuaSnip",
@@ -39,8 +40,9 @@ return {
           end,
         },
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          col_offset = -3,
+          side_padding = 0,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
@@ -74,15 +76,21 @@ return {
           { name = "nvim_lsp_signature_help" },
           { name = "luasnip" },
           { name = "nvim_lua" },
+          { name = "async_path" },
           { name = "buffer" },
         }),
         formatting = {
-          format = lspkind.cmp_format({
-            mode = "symbol",
-            maxwidth = 50,
-            ellipsis_char = "...",
-            symbol_map = { Codeium = "" },
-          }),
+          fields = { "kind", "abbr" },
+          format = function(entry, vim_item)
+            local kind = lspkind.cmp_format({
+              mode = "symbol_text",
+              maxwidth = 50,
+              symbol_map = { Codeium = "" },
+            })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            return kind
+          end,
         },
       })
 
@@ -93,12 +101,24 @@ return {
           { name = "buffer" },
         },
       })
-
+      
       -- cmd
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
       })
+    end,
+  },
+  -- Autocompletion
+  {
+    "Exafunction/codeium.nvim",
+    event = "InsertEnter",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup()
     end,
   },
 }

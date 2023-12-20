@@ -2,6 +2,7 @@ return {
   -- code completion
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
@@ -101,7 +102,7 @@ return {
           { name = "buffer" },
         },
       })
-      
+
       -- cmd
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),

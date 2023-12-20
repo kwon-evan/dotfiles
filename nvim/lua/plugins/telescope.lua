@@ -1,7 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "*",
+    tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local dropdown_theme = require('telescope.themes').get_dropdown({

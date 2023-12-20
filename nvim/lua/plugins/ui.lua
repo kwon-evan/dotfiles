@@ -6,9 +6,8 @@ return {
     name = "dracula",
     priority = 1000,
     config = function()
-      require("dracula").setup({
-        transparent_bg = true,
-      })
+      local pallete = require('dracula').colors()
+      require("dracula").setup({ colors = { bg = pallete.black } })
       vim.cmd([[colorscheme dracula]])
     end,
   },
@@ -17,6 +16,8 @@ return {
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
+    event = "BufEnter",
+    dependencies = { 'arkav/lualine-lsp-progress' },
     config = function()
       require("lualine").setup({
         options = {
@@ -26,6 +27,7 @@ return {
         },
         sections = {
           lualine_a = { { "mode", fmt = function(str) return str:sub(1, 1) end } },
+          lualine_x = { {'lsp_progress'}, 'filetype' },
           lualine_y = { { "datetime", style = "%H:%M %Y/%m/%d" } },
         },
       })
@@ -34,6 +36,7 @@ return {
   -- bufferline
   {
     'romgrk/barbar.nvim',
+    event = "BufEnter",
     dependencies = {
       'lewis6991/gitsigns.nvim',
     },
@@ -46,6 +49,7 @@ return {
   -- window bar
   {
     "utilyre/barbecue.nvim",
+    event = "BufEnter",
     name = "barbecue",
     version = "*",
     dependencies = {
@@ -56,6 +60,7 @@ return {
   -- file explorer
   {
     "stevearc/oil.nvim",
+    lazy = true,
     keys = { { "-", "<CMD>Oil<CR>", desc = "Open File Explorer" } },
     config = function()
       require("oil").setup({
@@ -73,6 +78,7 @@ return {
   -- indent
   {
     "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
     main = "ibl",
     opts = {
       scope = {
@@ -81,5 +87,5 @@ return {
         show_end = false,
       }
     }
-  }
+  },
 }

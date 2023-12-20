@@ -7,13 +7,13 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {}
+    opts = {},
   },
 
   -- toggleterm
   {
     "akinsho/toggleterm.nvim",
-    event = "VeryLazy",
+    lazy = true,
     config = function()
       local toggleterm = require("toggleterm")
       toggleterm.setup({
@@ -22,7 +22,7 @@ return {
 
       local Terminal = require("toggleterm.terminal").Terminal
       local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-      local vertical = Terminal:new({hidden = true, direction = "vertical", width = 80})
+      local vertical = Terminal:new({ hidden = true, direction = "vertical", width = 80 })
 
       -- lazygit
       local function _lazygit_toggle()
@@ -70,9 +70,9 @@ return {
     dependencies = {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
-      opts = {},        -- this is equalent to setup({}) function
+      opts = {},     -- this is equalent to setup({}) function
     },
-    event = "VeryLazy", -- keep for lazy loading
+    event = "BufRead", -- keep for lazy loading
     opts = {},
     init = function()
       vim.g.loaded_matchparen = 1
@@ -81,16 +81,16 @@ return {
 
   -- floating preview
   {
-    'rmagatti/goto-preview',
+    "rmagatti/goto-preview",
     lazy = true,
     opts = function()
-      require('goto-preview').setup {
+      require("goto-preview").setup({
         height = 45,
         default_mappings = true,
-      }
-    end
+      })
+    end,
   },
 
   -- comment
-  { 'numToStr/Comment.nvim', event = "VeryLazy", opts = {} }
+  { "numToStr/Comment.nvim", event = "BufRead", opts = {} },
 }

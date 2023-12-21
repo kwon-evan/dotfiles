@@ -28,7 +28,6 @@ map("n", "<C-f>", "<C-f>zz", {})
 -- leader movements
 map("n", "<Leader>w", "<cmd>write<CR>", { desc = "Save file" })
 map("n", "<Leader>s", "<cmd>source %<CR>", { desc = "Reload file" })
-map("n", "<Leader>v", "<cmd>cd ~/.config/nvim/<CR>:Telescope find_files<CR>", { desc = "Open config dir" })
 
 -- window movements
 map("n", "<C-k>", "<C-w>k", {})

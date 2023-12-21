@@ -1,12 +1,12 @@
 return {
   -- colorscheme
   {
-    'Mofiqul/dracula.nvim',
+    "Mofiqul/dracula.nvim",
     lazy = false,
     name = "dracula",
     priority = 1000,
     config = function()
-      local pallete = require('dracula').colors()
+      local pallete = require("dracula").colors()
       require("dracula").setup({ colors = { bg = pallete.black } })
       vim.cmd([[colorscheme dracula]])
     end,
@@ -17,17 +17,24 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "BufEnter",
-    dependencies = { 'arkav/lualine-lsp-progress' },
+    dependencies = { "arkav/lualine-lsp-progress" },
     config = function()
       require("lualine").setup({
         options = {
           component_separators = "",
           section_separators = "",
-          theme = "dracula"
+          theme = "auto",
         },
         sections = {
-          lualine_a = { { "mode", fmt = function(str) return str:sub(1, 1) end } },
-          lualine_x = { {'lsp_progress'}, 'filetype' },
+          lualine_a = {
+            {
+              "mode",
+              fmt = function(str)
+                return str:sub(1, 1)
+              end,
+            },
+          },
+          lualine_x = { { "lsp_progress" }, "filetype" },
           lualine_y = { { "datetime", style = "%H:%M %Y/%m/%d" } },
         },
       })
@@ -35,15 +42,17 @@ return {
   },
   -- bufferline
   {
-    'romgrk/barbar.nvim',
+    "romgrk/barbar.nvim",
     event = "BufEnter",
     dependencies = {
-      'lewis6991/gitsigns.nvim',
+      "lewis6991/gitsigns.nvim",
     },
-    init = function() vim.g.barbar_auto_setup = false end,
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
     opts = {
       animation = false,
-      icons = { separator = { left = '', right = '' } }
+      icons = { separator = { left = "", right = "" } },
     },
   },
   -- window bar
@@ -60,7 +69,7 @@ return {
   -- file explorer
   {
     "stevearc/oil.nvim",
-    lazy = true,
+    event = "VimEnter",
     keys = { { "-", "<CMD>Oil<CR>", desc = "Open File Explorer" } },
     config = function()
       require("oil").setup({
@@ -73,6 +82,7 @@ return {
           ["<C-l>"] = false,
         },
       })
+      vim.cmd([[autocmd vimenter * ++nested ++once lua require("oil").open()]])
     end,
   },
   -- indent
@@ -85,7 +95,7 @@ return {
         enabled = true,
         show_start = false,
         show_end = false,
-      }
-    }
+      },
+    },
   },
 }

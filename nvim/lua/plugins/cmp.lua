@@ -6,17 +6,15 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
-      "FelipeLema/cmp-async-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
+      "FelipeLema/cmp-async-path",
+      "onsails/lspkind.nvim",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind.nvim",
+      "rafamadriz/friendly-snippets",
     },
     opts = function()
-      local lspkind = require("lspkind")
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -24,15 +22,11 @@ return {
             and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
 
-      vim.keymap.set("i", "<C-k>", function()
-        luasnip.expand_or_jump()
-      end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-L>", function()
-        luasnip.jump(1)
-      end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-J>", function()
-        luasnip.jump(-1)
-      end, { silent = true })
+      require("luasnip.loaders.from_vscode").lazy_load()
+
+      local lspkind = require("lspkind")
+      local luasnip = require("luasnip")
+      local cmp = require("cmp")
 
       cmp.setup({
         snippet = {
@@ -73,9 +67,8 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "codeium" },
-          { name = "nvim_lsp" },
-          { name = "nvim_lsp_signature_help" },
           { name = "luasnip" },
+          { name = "nvim_lsp" },
           { name = "nvim_lua" },
           { name = "async_path" },
           { name = "buffer" },

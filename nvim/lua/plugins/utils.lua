@@ -18,48 +18,35 @@ return {
       local toggleterm = require("toggleterm")
       toggleterm.setup({
         start_in_insert = false,
+        size = 80,
+        direction = "vertical",
       })
-
-      local Terminal = require("toggleterm.terminal").Terminal
-      local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-      local vertical = Terminal:new({ hidden = true, direction = "vertical", width = 80 })
-
-      -- lazygit
-      local function _lazygit_toggle()
-        lazygit:toggle()
-      end
-
-      -- select executer by filename
-      local function _excute()
-        local excuter = vim.fn.expand("%:e")
-        if excuter == "py" then
-          excuter = "python3 "
-        elseif excuter == "sh" then
-          excuter = "bash "
-        elseif excuter == "rs" then
-          excuter = "rustc "
-        else
-          excuter = ""
-        end
-
-        if excuter ~= "" then
-          local cmd = '"' .. excuter .. vim.fn.expand("%:p") .. '"'
-          toggleterm.exec_command("direction=vertical size=80 cmd=" .. cmd)
-        else
-          vim.notify("Not support file type", "warning")
-        end
-      end
-
-      local _toggle = function()
-        vertical:toggle()
-      end
-
-      vim.keymap.set("n", "<leader>g", _lazygit_toggle, { desc = "Lazygit" })
-      vim.keymap.set("n", "<leader>e", _excute, { desc = "Excute" })
-      toggleterm.setup()
     end,
     keys = {
-      { "<leader>t", "<cmd>ToggleTerm direction=vertical size=80<cr>", desc = "ToggleTerm" },
+      { "<leader>t", function() require("toggleterm").toggle() end, desc = "ToggleTerm" },
+      {
+        "<leader>e",
+        function()
+          local excuter = vim.fn.expand("%:e")
+          if excuter == "py" then
+            excuter = "python3 "
+          elseif excuter == "sh" then
+            excuter = "bash "
+          elseif excuter == "rs" then
+            excuter = "rustc "
+          else
+            excuter = ""
+          end
+
+          if excuter ~= "" then
+            local cmd = '"' .. excuter .. vim.fn.expand("%:p") .. '"'
+            require("toggleterm").exec_command("cmd=" .. cmd)
+          else
+            vim.notify("Not support file type", "warning")
+          end
+        end,
+        desc = "Execute Current File",
+      },
     },
   },
 
@@ -70,7 +57,7 @@ return {
     dependencies = {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
-      opts = {},     -- this is equalent to setup({}) function
+      opts = {},       -- this is equalent to setup({}) function
     },
     event = "BufRead", -- keep for lazy loading
     opts = {},
@@ -82,7 +69,7 @@ return {
   -- floating preview
   {
     "rmagatti/goto-preview",
-    lazy = true,
+    event = "BufRead",
     opts = function()
       require("goto-preview").setup({
         height = 45,

@@ -1,14 +1,18 @@
 return {
   -- colorscheme
   {
-    "Mofiqul/dracula.nvim",
+    "scottmckendry/cyberdream.nvim",
     lazy = false,
-    name = "dracula",
     priority = 1000,
     config = function()
-      local pallete = require("dracula").colors()
-      require("dracula").setup({ colors = { bg = pallete.black } })
-      vim.cmd([[colorscheme dracula]])
+      require("cyberdream").setup({
+        -- Recommended - see "Configuring" below for more config options
+        transparent = true,
+        italic_comments = true,
+        hide_fillchars = true,
+        borderless_telescope = true,
+      })
+      vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
   -- icons
@@ -23,7 +27,8 @@ return {
         options = {
           component_separators = "",
           section_separators = "",
-          theme = "auto",
+          -- theme = "auto",
+          theme = "cyberdream",
         },
         sections = {
           lualine_a = {
@@ -87,15 +92,30 @@ return {
   },
   -- indent
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    main = "ibl",
-    opts = {
-      scope = {
-        enabled = true,
-        show_start = false,
-        show_end = false,
-      },
-    },
+    "echasnovski/mini.indentscope",
+    event = { "BufReadPre", "BufNewFile" },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "alpha",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "neotree",
+        },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+      local indent = require("mini.indentscope")
+      indent.setup({
+        symbol = "│",
+        draw = { animation = indent.gen_animation.none() },
+        options = { try_as_border = true },
+      })
+    end,
   },
 }

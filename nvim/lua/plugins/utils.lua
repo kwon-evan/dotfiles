@@ -23,7 +23,13 @@ return {
       })
     end,
     keys = {
-      { "<leader>t", function() require("toggleterm").toggle() end, desc = "ToggleTerm" },
+      {
+        "<leader>t",
+        function()
+          require("toggleterm").toggle()
+        end,
+        desc = "ToggleTerm",
+      },
       {
         "<leader>e",
         function()
@@ -57,7 +63,7 @@ return {
     dependencies = {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
-      opts = {},       -- this is equalent to setup({}) function
+      opts = {},     -- this is equalent to setup({}) function
     },
     event = "BufRead", -- keep for lazy loading
     opts = {},
@@ -80,4 +86,10 @@ return {
 
   -- comment
   { "numToStr/Comment.nvim", event = "BufRead", opts = {} },
+
+  -- visual surround
+  {
+    "NStefan002/visual-surround.nvim",
+    config = true
+  },
 }

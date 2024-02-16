@@ -12,9 +12,22 @@ return {
         hide_fillchars = true,
         borderless_telescope = true,
       })
-      vim.cmd("colorscheme cyberdream") -- set the colorscheme
+      -- vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
+  {
+    "Mofiqul/dracula.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("dracula").setup({
+        show_end_of_buffer = true,
+        transparent_bg = true,
+      })
+      vim.cmd("colorscheme dracula")
+    end,
+  },
+
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true, opt = true },
   -- statusline
@@ -27,8 +40,7 @@ return {
         options = {
           component_separators = "",
           section_separators = "",
-          -- theme = "auto",
-          theme = "cyberdream",
+          theme = "auto",
         },
         sections = {
           lualine_a = {

@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# function: Check if command is installed
 is_installed() {
     if ! command -v $1 &> /dev/null; then
         echo "[INFO] $1 not found"
@@ -8,6 +11,7 @@ is_installed() {
     fi
 }
 
+# function: Install starship
 install_starship() {
     if is_installed starship; then
         return
@@ -16,6 +20,7 @@ install_starship() {
     curl -fsSL https://starship.rs/install.sh | $SHELL
 }
 
+# function: Install brew
 install_brew() {
     if is_installed brew; then
         return
@@ -25,6 +30,7 @@ install_brew() {
     $SHELL -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
+# function: Install neovim
 install_neovim() {
     if is_installed nvim; then
         return
@@ -35,8 +41,6 @@ install_neovim() {
             sudo snap install nvim --classic
         elif is_installed apt; then
             sudo apt install neovim
-        elif is_installed pacman; then
-            sudo pacman -S neovim
         else
             echo "[ERROR] OS not supported"
             exit 1
@@ -54,36 +58,23 @@ install_neovim() {
     fi
 }
 
+# function: Create symbolic link
+link_config() {
+  CONFIG_PATH="${HOME}/.config"
+  if [ -e "${CONFIG_PATH}/$1" ]; then
+    echo "[INFO] $1 already exists"
+  else
+    ln -s ${PWD}/$1 ${CONFIG_PATH}/$1
+  fi
+}
 
-CONFIG_PATH="${HOME}/.config"
-
+# Install
+echo "[INFO] Install..."
 install_starship
 install_neovim
 
-# link neovim config
-if [ -e "${CONFIG_PATH}/nvim/" ]; then
-    echo "[INFO] nvchad_config already exists"
-else
-    ln -s ${PWD}/nvim ${CONFIG_PATH}/nvim
-fi
-
-# link starship config
-if [ -e "${CONFIG_PATH}/starship.toml" ]; then
-    echo "[INFO] starship.toml already exists"
-else
-    ln -s ${PWD}/starship.toml ${CONFIG_PATH}/starship.toml
-fi
-
-# link yazi config
-if [ -e "${CONFIG_PATH}/yazi" ]; then
-    echo "[INFO] yazi config already exists"
-else
-    ln -s ${PWD}/yazi ${CONFIG_PATH}/yazi
-fi
-
-# link wezterm config
-if [ -e "${CONFIG_PATH}/wezterm" ]; then
-    echo "[INFO] wezterm already exists"
-else
-    ln -s ${PWD}/wezterm ${CONFIG_PATH}/wezterm
-fi
+# Link
+echo "[INFO] Link config..."
+link_config nvim
+link_config starship.toml
+link_config yazi

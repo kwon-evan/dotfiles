@@ -14,7 +14,7 @@ return {
 		end,
 	},
 	-- icons
-	{ "nvim-tree/nvim-web-devicons", lazy = true, opt = true },
+	{ "nvim-tree/nvim-web-devicons", lazy = true },
 	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",

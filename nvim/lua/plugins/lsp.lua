@@ -13,21 +13,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+local function get_keys(t)
+  local keys={}
+  for key,_ in pairs(t) do
+    table.insert(keys, key)
+  end
+  return keys
+end
+
 local languages = {
 	-- lua
-	"lua_ls",
+	lua_ls = { { Lua = { diagnostics = { globals = { "vim", "describe", "it" } } } } },
 	-- python
-	"pyright",
-	"ruff_lsp",
+	pyright = { { pyright = { disableOrganizeImports = true } } }, -- Using Ruff's import organizer
+	ruff_lsp = {},
 	-- rust
-	"rust_analyzer",
+	rust_analyzer = {},
 	-- bash
-	"bashls",
+	bashls = {},
 	-- web
-	"html",
-	"cssls",
-	"tsserver",
-	"tailwindcss",
+	html = {},
+	cssls = {},
+	tsserver = {},
+	tailwindcss = {},
 }
 
 return {
@@ -36,20 +44,17 @@ return {
 		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			require("lspconfig").lua_ls.setup({
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim", "describe", "it" },
-						},
-					},
-				},
-			})
+			local on_attach = function(client, bufnr)
+				if client.name == "ruff_lsp" then
+					client.server_capabilities.hoverProvider = false
+				end
+			end
 
-			for _, language in pairs(languages) do
+			for language, settings in pairs(languages) do
 				require("lspconfig")[language].setup({
 					capabilities = capabilities,
+					settings = settings,
+					on_attach = on_attach,
 				})
 			end
 
@@ -70,7 +75,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = languages,
+			ensure_installed = get_keys(languages),
 			automatic_installation = true,
 		},
 	},

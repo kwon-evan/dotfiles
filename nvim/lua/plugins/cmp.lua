@@ -103,6 +103,7 @@ return {
       })
     end,
   },
+
   -- Autocompletion
   {
     "Exafunction/codeium.nvim",

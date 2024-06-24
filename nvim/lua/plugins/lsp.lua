@@ -25,7 +25,10 @@ local languages = {
   -- lua
   lua_ls = { { Lua = { diagnostics = { globals = { "vim", "describe", "it" } } } } },
   -- python
-  pyright = { { pyright = { disableOrganizeImports = true } } }, -- Using Ruff's import organizer
+  pyright = {
+    { pyright = { disableOrganizeImports = false } },
+    { analysis = { diagnostics = false } },
+  },
   ruff_lsp = {},
   -- rust
   rust_analyzer = {},
@@ -46,7 +49,7 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = function(client, bufnr)
         if client.name == "ruff_lsp" then
-          client.server_capabilities.hoverProvider = false
+          client.server_capabilities.hoverProvider = true
         end
       end
 

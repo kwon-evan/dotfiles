@@ -104,4 +104,13 @@ return {
     },
     config = true,
   },
+
+  -- html tag auto close
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    ft = { "html", "svelte", "markdown" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+  }
 }

@@ -1,12 +1,13 @@
 # DOTFILES
 
-~/.config  
-　　├── starship.toml  
-　　├── .tmux.conf  
-　　├── setup.sh  
-　　├── yazi/  
-　　├── wezterm/  
-　　└── nvim/  
+```
+~/.config
+　　├──  ags/
+　　├──  hypr/
+　　├──  nvim/
+　　├──  yazi/
+　　└──  README.md
+```
 
 ## Requirements
 

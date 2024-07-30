@@ -1,16 +1,14 @@
 return {
-  -- colorscheme
   {
-    "EdenEast/nightfox.nvim",
+    "Mofiqul/dracula.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("nightfox").setup({
-        options = {
-          transparent = true,
-        },
+      require('dracula').setup({
+        show_end_of_buffer = true,
+        transparent_bg = true,
       })
-      vim.cmd("colorscheme carbonfox")
+      vim.cmd("colorscheme dracula")
     end,
   },
   -- icons

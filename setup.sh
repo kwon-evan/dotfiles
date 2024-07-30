@@ -1,80 +1,64 @@
 #!/bin/bash
 
-# function: Check if command is installed
-is_installed() {
+# Dotfiles installation script
+
+#----------------------
+# Variables
+#----------------------
+DOTFILES_DIR="$HOME/dotfiles"
+CONFIG_DIR="$HOME/.config"
+dependencies=("git" "fzf" "nodejs" "npm")
+
+#----------------------
+# Functions
+#----------------------
+get_directories() {
+    local dir="$1"
+    find "$dir" -maxdepth 1 -type d -not -name ".*" -printf "%f\n" | tail -n +2
+}
+
+create_symlink() {
+    local src="$1"
+    local dest="$2"
+    if [ -e "$dest" ]; then
+        echo "Backing up existing $dest"
+        mv "$dest" "${dest}.bak"
+    fi
+    ln -s "$src" "$dest"
+    echo "Created symlink: $dest -> $src"
+}
+
+check_and_install() {
     if ! command -v $1 &> /dev/null; then
-        echo "[INFO] $1 not found"
-        return 1
+        echo "$1 is not installed. Installing..."
+        sudo apt install $1
     else
-        echo "[INFO] $1 already installed"
-        return 0
+        echo "$1 is already installed."
     fi
 }
 
-# function: Install starship
-install_starship() {
-    if is_installed starship; then
-        return
-    fi
-    echo "[INFO] Installing starship..."
-    curl -fsSL https://starship.rs/install.sh | $SHELL
+#----------------------
+# Main Script
+#----------------------
+main() {
+    # Create necessary directories
+    mkdir -p "$CONFIG_DIR"
+
+    # Create symlinks for all directories
+    for dir in $(get_directories "$DOTFILES_DIR"); do
+        create_symlink "$DOTFILES_DIR/$dir" "$CONFIG_DIR/$dir"
+    done
+
+    # Set permissions
+    chmod 755 "$CONFIG_DIR"
+
+    # Check and install dependencies
+    for dep in "${dependencies[@]}"; do
+        check_and_install "$dep"
+    done
+
+    echo "Dotfiles installation complete!"
 }
 
-# function: Install brew
-install_brew() {
-    if is_installed brew; then
-        return
-    fi
-
-    echo "[INFO] Installing brew..."
-    $SHELL -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
-
-# function: Install neovim
-install_neovim() {
-    if is_installed nvim; then
-        return
-    fi
-
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        if is_installed snap; then
-            sudo snap install nvim --classic
-        elif is_installed apt; then
-            sudo apt install neovim
-        else
-            echo "[ERROR] OS not supported"
-            exit 1
-        fi
-
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        if ! is_installed brew; then
-            install_brew
-        fi
-
-        brew install neovim
-    else
-        echo "[ERROR] OS not supported"
-        exit 1
-    fi
-}
-
-# function: Create symbolic link
-link_config() {
-  CONFIG_PATH="${HOME}/.config"
-  if [ -e "${CONFIG_PATH}/$1" ]; then
-    echo "[INFO] $1 already exists"
-  else
-    ln -s ${PWD}/$1 ${CONFIG_PATH}/$1
-  fi
-}
-
-# Install
-echo "[INFO] Install..."
-install_starship
-install_neovim
-
-# Link
-echo "[INFO] Link config..."
-link_config nvim
-link_config starship.toml
-link_config yazi
+# Run the main script
+main

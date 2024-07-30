@@ -24,10 +24,10 @@ return {
           "css",
           "javascript",
           "typescript",
+          "svelte",
         },
         highlight = { enable = true },
         indent = { enable = true },
-        autotag = { enable = true },
       })
     end,
   },

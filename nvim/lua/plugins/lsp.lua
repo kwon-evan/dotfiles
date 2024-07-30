@@ -39,6 +39,7 @@ local languages = {
   cssls = {},
   tsserver = {},
   tailwindcss = {},
+  svelte = {},
 }
 
 return {

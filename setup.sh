@@ -37,6 +37,43 @@ check_and_install() {
     fi
 }
 
+add_aliases() {
+    local rc_file=""
+    local shell_name=$(basename "$SHELL")
+
+    case "$shell_name" in
+        bash)
+            rc_file="$HOME/.bashrc"
+            ;;
+        zsh)
+            rc_file="$HOME/.zshrc"
+            ;;
+        fish)
+            rc_file="$HOME/.config/fish/config.fish"
+            ;;
+        *)
+            echo "Unsupported shell: $shell_name"
+            return 1
+            ;;
+    esac
+
+    if [ -f "$rc_file" ]; then
+        if ! grep -q "Source aliases from dotfiles" "$rc_file"; then
+            echo "" >> "$rc_file"
+            echo "# Source aliases from dotfiles" >> "$rc_file"
+            echo "for alias_file in ~/dotfiles/aliases/*.sh; do" >> "$rc_file"
+            echo "    [ -r \"\$alias_file\" ] && . \"\$alias_file\"" >> "$rc_file"
+            echo "done" >> "$rc_file"
+            echo "Aliases sourcing has been added to $rc_file"
+        else
+            echo "Aliases sourcing is already in $rc_file"
+        fi
+    else
+        echo "RC file $rc_file does not exist"
+        return 1
+    fi
+}
+
 #----------------------
 # Main Script
 #----------------------
@@ -56,6 +93,8 @@ main() {
     for dep in "${dependencies[@]}"; do
         check_and_install "$dep"
     done
+
+    add_aliases
 
     echo "Dotfiles installation complete!"
 }

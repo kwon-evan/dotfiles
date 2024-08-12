@@ -112,5 +112,25 @@ return {
     ft = { "html", "svelte", "markdown" },
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = true,
-  }
+  },
+
+  -- Symbol Outline
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = {
+      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+    },
+    opts = {
+      symbol_folding = {
+        auto_unfold = {
+          only = 2,
+        },
+      },
+      outline_window = {
+        auto_jump = true,
+      },
+    },
+  },
 }

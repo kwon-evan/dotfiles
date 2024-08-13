@@ -74,6 +74,36 @@ add_aliases() {
     fi
 }
 
+set_default_editor() {
+  local editor="nvim"
+  local shell_name=$(basename "$SHELL")
+
+  case "$shell_name" in
+    bash)
+      rc_file="$HOME/.bashrc"
+      ;;
+    zsh)
+      rc_file="$HOME/.zshrc"
+      ;;
+    fish)
+      rc_file="$HOME/.config/fish/config.fish"
+      ;;
+    *)
+      echo "Unsupported shell: $shell_name"
+      return 1
+      ;;
+  esac
+
+  if [ -f "$rc_file"]; then
+    if ! grep -q "export EDITOR" "$rc_file"; then
+      echo "export EDITOR=$editor" >> "$rc_file"
+      echo "Editor set to $editor in $rc_file"
+    else
+      echo "Editor is already set in $rc_file"
+    fi
+}
+
+
 #----------------------
 # Main Script
 #----------------------
@@ -95,6 +125,8 @@ main() {
     done
 
     add_aliases
+
+    set_default_editor
 
     echo "Dotfiles installation complete!"
 }

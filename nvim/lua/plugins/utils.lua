@@ -18,20 +18,48 @@ return {
       local toggleterm = require("toggleterm")
       toggleterm.setup({
         start_in_insert = false,
-        size = 80,
-        direction = "vertical",
+        autochdir = true,
+        size = function(term)
+          if term.direction == "horizontal" then
+            return 15
+          elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+          else
+            return 20
+          end
+        end,
       })
     end,
     keys = {
       {
-        "<leader>t",
+        "<leader>tt",
         function()
-          require("toggleterm").toggle()
+          local Terminal = require("toggleterm.terminal").Terminal
+          local vertical_term = Terminal:new({ direction = "vertical" })
+          vertical_term:toggle()
         end,
-        desc = "ToggleTerm",
+        desc = "ToggleTerm - Vertical",
       },
       {
-        "<leader>e",
+        "<leader>th",
+        function()
+          local Terminal = require("toggleterm.terminal").Terminal
+          local horizontal_term = Terminal:new({ direction = "horizontal" })
+          horizontal_term:toggle()
+        end,
+        desc = "ToggleTerm - Horizontal",
+      },
+      {
+        "<leader>tf",
+        function()
+          local Terminal = require("toggleterm.terminal").Terminal
+          local floating_term = Terminal:new({ direction = "float" })
+          floating_term:toggle()
+        end,
+        desc = "ToggleTerm - Floating",
+      },
+      {
+        "<leader>te",
         function()
           local excuter = vim.fn.expand("%:e")
           if excuter == "py" then

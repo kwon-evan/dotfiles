@@ -37,7 +37,7 @@ local languages = {
   -- web
   html = {},
   cssls = {},
-  tsserver = {},
+  ts_ls = {},
   tailwindcss = {},
   svelte = {},
 }

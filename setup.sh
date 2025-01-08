@@ -101,6 +101,7 @@ set_default_editor() {
     else
       echo "Editor is already set in $rc_file"
     fi
+  fi
 }
 
 

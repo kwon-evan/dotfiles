@@ -29,7 +29,7 @@ local languages = {
     { pyright = { disableOrganizeImports = false } },
     { analysis = { diagnostics = false } },
   },
-  ruff_lsp = {},
+  ruff = {},
   -- rust
   rust_analyzer = {},
   -- bash
@@ -49,7 +49,7 @@ return {
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = function(client, bufnr)
-        if client.name == "ruff_lsp" then
+        if client.name == "ruff" then
           client.server_capabilities.hoverProvider = true
         end
       end

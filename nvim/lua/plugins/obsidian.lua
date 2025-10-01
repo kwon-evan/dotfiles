@@ -15,7 +15,7 @@ return {
     opts = {
       workspaces = {
         {
-          name = "valut",
+          name = "vault",
           path = "~/vaults/",
         },
       },
@@ -43,7 +43,7 @@ return {
             return require("obsidian").util.smart_action()
           end,
           opts = { buffer = true, expr = true },
-        }
+        },
       },
     },
   },
@@ -64,5 +64,5 @@ return {
         },
       },
     },
-  }
+  },
 }

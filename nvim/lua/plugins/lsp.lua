@@ -13,34 +13,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-local function get_keys(t)
-  local keys = {}
-  for key, _ in pairs(t) do
-    table.insert(keys, key)
+-- Automatically load LSP servers from lsp/ directory
+local function get_lsp_servers()
+  local lsp_path = vim.fn.stdpath("config") .. "/lsp"
+  local servers = {}
+  
+  if vim.fn.isdirectory(lsp_path) == 1 then
+    local files = vim.fn.readdir(lsp_path)
+    for _, file in ipairs(files) do
+      if file:match("%.lua$") then
+        local server_name = file:gsub("%.lua$", "")
+        table.insert(servers, server_name)
+      end
+    end
   end
-  return keys
+  
+  return servers
 end
-
-local languages = {
-  -- lua
-  lua_ls = { { Lua = { diagnostics = { globals = { "vim", "describe", "it" } } } } },
-  -- python
-  pyright = {
-    { pyright = { disableOrganizeImports = false } },
-    { analysis = { diagnostics = false } },
-  },
-  ruff = {},
-  -- rust
-  rust_analyzer = {},
-  -- bash
-  bashls = {},
-  -- web
-  html = {},
-  cssls = {},
-  ts_ls = {},
-  tailwindcss = {},
-  svelte = {},
-}
 
 return {
   {
@@ -51,43 +40,29 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
-      ensure_installed = get_keys(languages),
+      ensure_installed = get_lsp_servers(),
       automatic_enable = true,
     },
   },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
-    dependencies = { 
+    dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local on_attach = function(client, bufnr)
-        if client.name == "ruff" then
-          client.server_capabilities.hoverProvider = true
-        end
-      end
 
-      -- Configure all LSP servers using vim.lsp.config()
-      for language, settings in pairs(languages) do
-        vim.lsp.config(language, {
-          capabilities = capabilities,
-          settings = settings,
-          on_attach = on_attach,
-        })
-      end
-
-      -- Enable all configured LSP servers
-      for language, _ in pairs(languages) do
-        vim.lsp.enable(language)
-      end
+      -- 모든 LSP 서버에 공통 설정 적용
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
 
       vim.lsp.handlers["textDocument/publishDiagnostics"] =
-          vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = false,
-          })
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          virtual_text = false,
+        })
     end,
     keys = {
       { "<leader>d", vim.diagnostic.open_float, desc = "LSP Diagnostic" },

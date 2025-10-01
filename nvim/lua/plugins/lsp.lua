@@ -44,8 +44,24 @@ local languages = {
 
 return {
   {
+    "williamboman/mason.nvim",
+    opts = {},
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = get_keys(languages),
+      automatic_enable = true,
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    lazy = false,
+    dependencies = { 
+      "hrsh7th/cmp-nvim-lsp",
+      "williamboman/mason-lspconfig.nvim",
+    },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = function(client, bufnr)
@@ -54,12 +70,18 @@ return {
         end
       end
 
+      -- Configure all LSP servers using vim.lsp.config()
       for language, settings in pairs(languages) do
-        require("lspconfig")[language].setup({
+        vim.lsp.config(language, {
           capabilities = capabilities,
           settings = settings,
           on_attach = on_attach,
         })
+      end
+
+      -- Enable all configured LSP servers
+      for language, _ in pairs(languages) do
+        vim.lsp.enable(language)
       end
 
       vim.lsp.handlers["textDocument/publishDiagnostics"] =
@@ -69,18 +91,6 @@ return {
     end,
     keys = {
       { "<leader>d", vim.diagnostic.open_float, desc = "LSP Diagnostic" },
-    },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {},
-  },
-  -- mason <-> lspconfig
-  {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = get_keys(languages),
-      automatic_installation = true,
     },
   },
 }

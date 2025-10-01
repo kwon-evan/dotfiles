@@ -106,7 +106,7 @@ return {
 
   -- Autocompletion
   {
-    "Exafunction/codeium.nvim",
+    "Exafunction/windsurf.nvim",
     event = "InsertEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",

@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local function get_lsp_servers()
   local lsp_path = vim.fn.stdpath("config") .. "/lsp"
   local servers = {}
-  
+
   if vim.fn.isdirectory(lsp_path) == 1 then
     local files = vim.fn.readdir(lsp_path)
     for _, file in ipairs(files) do
@@ -27,7 +27,7 @@ local function get_lsp_servers()
       end
     end
   end
-  
+
   return servers
 end
 
@@ -60,9 +60,9 @@ return {
       })
 
       vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = false,
-        })
+          vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = false,
+          })
     end,
     keys = {
       { "<leader>d", vim.diagnostic.open_float, desc = "LSP Diagnostic" },

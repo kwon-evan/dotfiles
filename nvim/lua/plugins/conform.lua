@@ -14,6 +14,7 @@ return {
         javascript = { { "prettierd", "prettier", "eslint_d" } },
         typescript = { { "prettierd", "prettier", "eslint_d" } },
         bash = { "shfmt" },
+        protobuf = { "protolint" },
         ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace" },
       },

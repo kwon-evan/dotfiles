@@ -53,9 +53,9 @@ notify_user() {
 
 # Use sed to replace the palette setting in the wallust config file
 if [ "$next_mode" = "Dark" ]; then
-    sed -i 's/^palette = .*/palette = "'"$pallete_dark"'"/' "$wallust_config" 
+    sed -i 's/^palette = .*/palette = "'"$pallete_dark"'"/' "$wallust_config"
 else
-    sed -i 's/^palette = .*/palette = "'"$pallete_light"'"/' "$wallust_config" 
+    sed -i 's/^palette = .*/palette = "'"$pallete_light"'"/' "$wallust_config"
 fi
 
 # Function to set Waybar style
@@ -206,7 +206,7 @@ set_custom_gtk_theme() {
         fi
         echo "Selected icon theme for $mode mode: $selected_icon"
         gsettings set $icon_setting "$selected_icon"
-        
+
         ## QT5ct icon_theme
         sed -i "s|^icon_theme=.*$|icon_theme=$selected_icon|" "$HOME/.config/qt5ct/qt5ct.conf"
         sed -i "s|^icon_theme=.*$|icon_theme=$selected_icon|" "$HOME/.config/qt6ct/qt6ct.conf"
@@ -232,7 +232,7 @@ sleep 0.5
 # Run remaining scripts
 ${SCRIPTSDIR}/WallustSwww.sh
 sleep 1
-${SCRIPTSDIR}/Refresh.sh 
+${SCRIPTSDIR}/Refresh.sh
 
 sleep 0.3
 # Display notifications for theme and icon changes

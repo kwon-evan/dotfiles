@@ -59,10 +59,10 @@ return {
         capabilities = capabilities,
       })
 
-      vim.lsp.handlers["textDocument/publishDiagnostics"] =
-          vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = false,
-          })
+      -- Configure diagnostics (virtual_text = false)
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
     end,
     keys = {
       { "<leader>d", vim.diagnostic.open_float, desc = "LSP Diagnostic" },

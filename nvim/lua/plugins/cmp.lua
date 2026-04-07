@@ -1,4 +1,16 @@
 return {
+  {
+    "Exafunction/windsurf.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+      })
+    end
+  },
+
   -- code completion
   {
     "hrsh7th/nvim-cmp",
@@ -28,10 +40,10 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
-      cmp.setup({
+      return {
         snippet = {
           expand = function(args)
-            luasnip.lsp_expand(args.body) -- For `luasnip` users.
+            luasnip.lsp_expand(args.body)
           end,
         },
         window = {
@@ -74,19 +86,34 @@ return {
           { name = "buffer" },
         }),
         formatting = {
-          fields = { "kind", "abbr" },
-          format = function(entry, vim_item)
-            local kind = lspkind.cmp_format({
-              mode = "symbol_text",
-              maxwidth = 50,
-              symbol_map = { Codeium = "" },
-            })(entry, vim_item)
-            local strings = vim.split(kind.kind, "%s", { trimempty = true })
-            kind.kind = " " .. (strings[1] or "") .. " "
-            return kind
-          end,
+          fields = { "kind", "abbr", "menu" },
+          format = lspkind.cmp_format({
+            mode = "symbol",
+            maxwidth = 50,
+            ellipsis_char = "...",
+            symbol_map = { Codeium = "" },
+            before = function(entry, vim_item)
+              -- Use lspkind symbolic for clean mapping
+              local icon = lspkind.symbolic(vim_item.kind)
+              vim_item.kind = (icon ~= "" and icon or vim_item.kind)
+
+              -- Source name display in menu
+              vim_item.menu = ({
+                nvim_lsp = "[LSP]",
+                luasnip = "[Snippet]",
+                buffer = "[Buffer]",
+                async_path = "[Path]",
+                codeium = "[AI]",
+              })[entry.source.name]
+              return vim_item
+            end,
+          }),
         },
-      })
+      }
+    end,
+    config = function(_, opts)
+      local cmp = require("cmp")
+      cmp.setup(opts)
 
       -- search & help
       cmp.setup.cmdline({ "/", "?" }, {
